@@ -13,6 +13,8 @@ import com.invetronix.backend.registroUsuario.exceptions.UserAlreadyRegisteredEx
 import com.invetronix.backend.registroUsuario.exceptions.UserNotFoundException;
 import com.invetronix.backend.registroUsuario.models.User;
 import com.invetronix.backend.registroUsuario.services.IClienteService;
+import com.invetronix.backend.shared.controllers.ErrorResponse;
+
 import lombok.RequiredArgsConstructor;
 
 @RestController

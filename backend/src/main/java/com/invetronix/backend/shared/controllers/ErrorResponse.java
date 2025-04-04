@@ -1,4 +1,4 @@
-package com.invetronix.backend.registroUsuario.controllers;
+package com.invetronix.backend.shared.controllers;
 
 import org.springframework.http.HttpStatus;
 
