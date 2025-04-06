@@ -8,15 +8,16 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Repository;
 import com.invetronix.backend.APIproducts.entities.EntityProduct;
+import com.invetronix.backend.APIproducts.data.Data;
 
 @Repository
 public class RepositoryProduct {
-    private final Map<String, EntityProduct> db = new HashMap<>();
+    private final Map<String, EntityProduct> db = Data.getInstance().read();
 
     //metodo para guardar un cliente
     public EntityProduct save(EntityProduct product) { 
         db.put(product.getId(), product);
-        //Data.getInstance().write((HashMap<String, EntityProduct>) db);
+        Data.getInstance().write((HashMap<String, EntityProduct>) db);
         return product;
     }
 
@@ -26,15 +27,18 @@ public class RepositoryProduct {
     }
 
     //metodo para eliminar un cliente
-    public void delete(String id) {
-        db.remove(id);
-        //Data.getInstance().write((HashMap<String, EntityProduct>) db);
+    public Optional<EntityProduct> delete(String id) {
+        EntityProduct removedProduct = db.remove(id);
+        if (removedProduct != null) {
+            Data.getInstance().write((HashMap<String, EntityProduct>) db);
+        }
+        return Optional.ofNullable(removedProduct);
     }
 
     //metodo para modificar un cliente
     public Optional<EntityProduct> update(EntityProduct product) {
         db.put(product.getId(), product);
-        //Data.getInstance().write((HashMap<String, EntityProduct>) db);
+        Data.getInstance().write((HashMap<String, EntityProduct>) db);
         return Optional.of(product);
     }
 
@@ -43,13 +47,13 @@ public class RepositoryProduct {
         return new ArrayList<>(db.values());
     }
 
-    /*metodo para buscar por filtros
-    public List<EntityProduct> findByFilters(String name, String category, String Supplier) {
+    //metodo para buscar por filtros
+    public List<EntityProduct> findByFilters(String nameProduct, String category, String nameSupplier) {
         return db.values().stream()
-        .filter(u -> name ==null || u.getName().contains(name))
-        .filter(u -> edad == 0  || ((Cliente) u).getEdad() == edad)
-        .filter(u -> email ==null || u.getEmail().contains(email))
+        .filter(u -> nameProduct ==null || u.getName().contains(nameProduct))
+        .filter(u -> category == null  || u.getCategory().contains(category))
+        .filter(u -> nameSupplier ==null || u.getSupplier().getName().contains(nameSupplier))
         .collect(Collectors.toList());
-    }*/
+    }
 
 }

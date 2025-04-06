@@ -1,11 +1,12 @@
 package com.invetronix.backend.APIproducts.entities;
 
+import java.io.Serializable;
 import java.util.UUID;
 import lombok.Data;
 
 @Data
-public class EntityProduct {
-
+public class EntityProduct implements Serializable{
+    private static final long serialVersionUID = 1L;
     private String id;
     private String name;
     private String description;

@@ -1,5 +1,6 @@
 package com.invetronix.backend.APIproducts.dtos;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -28,6 +29,6 @@ public class DtoProduct {
     @Min(value = 1, message = "El stock debe de ser positivo")
     private int stockQuantity;
 
-    
+    @Valid
     private DtoSupplier supplier;
 }

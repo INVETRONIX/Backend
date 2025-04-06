@@ -2,7 +2,7 @@ package com.invetronix.backend.APIproducts.dtos;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.Pattern;
 import lombok.Builder;
 import lombok.Data;
 
@@ -18,7 +18,7 @@ public class DtoSupplier {
     private String company;
 
     @NotBlank(message = "El telefono no puede estar vacio")
-    @Size(max = 10, message = "El telefono el demasiado largo")
+    @Pattern(regexp = "^\\+57\\s?[0-9]{10}$", message = "El teléfono debe estar en formato +57 3104567890")
     private String phone;
 
     @Email(message = "Correo no es valido")

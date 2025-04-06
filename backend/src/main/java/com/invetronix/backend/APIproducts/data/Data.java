@@ -1,4 +1,4 @@
-package com.invetronix.backend.registroUsuario.data;
+package com.invetronix.backend.APIproducts.data;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -7,23 +7,23 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.HashMap;
-import com.invetronix.backend.registroUsuario.models.User;
+import com.invetronix.backend.APIproducts.entities.EntityProduct;
 
-public class Data implements Serializable {
+public class Data implements Serializable{
     private static Data instance;
 
-    private Data() {}
+    private Data(){}
 
-    public static Data getInstance() {
+    public static Data getInstance(){
         if (instance == null) {
             instance = new Data();
         }
         return instance;
     }
 
-    public void write(HashMap<String, User> db) {
+     public void write(HashMap<String, EntityProduct> db) {
         try{
-            FileOutputStream file = new FileOutputStream("DataUsers.dat");
+            FileOutputStream file = new FileOutputStream("DataProducts.dat");
             ObjectOutputStream escritor = new ObjectOutputStream(file);
             escritor.writeObject(db);
         }catch(IOException ex){
@@ -31,15 +31,14 @@ public class Data implements Serializable {
         }
     }
 
-    public HashMap<String, User> read() {
+    public HashMap<String, EntityProduct> read() {
         try {
-            FileInputStream file = new FileInputStream("DataUsers.dat");
+            FileInputStream file = new FileInputStream("DataProducts.dat");
             ObjectInputStream lector = new ObjectInputStream(file);
-            return (HashMap<String, User>) lector.readObject();
+            return (HashMap<String, EntityProduct>) lector.readObject();
         }  catch (IOException | ClassNotFoundException ex) {
             ex.printStackTrace();
-            return new HashMap<String, User>();
+            return new HashMap<String, EntityProduct>();
         }
     }
-
 }
