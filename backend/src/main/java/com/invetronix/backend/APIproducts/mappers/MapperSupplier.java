@@ -2,7 +2,7 @@ package com.invetronix.backend.APIproducts.mappers;
 
 import com.invetronix.backend.APIproducts.dtos.DtoSupplier;
 import com.invetronix.backend.APIproducts.entities.EntitySupplier;
-import com.invetronix.backend.APIproducts.models.Supplier;
+import com.invetronix.backend.APIsuppliers.models.Supplier;
 
 public class MapperSupplier {
     
