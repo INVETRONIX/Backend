@@ -4,8 +4,6 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import com.invetronix.backend.login.exceptions.InvalidCredentialsException;
 import com.invetronix.backend.registroUsuario.exceptions.UserNotFoundException;
-import com.invetronix.backend.registroUsuario.models.Administrador;
-import com.invetronix.backend.registroUsuario.models.Cliente;
 import com.invetronix.backend.registroUsuario.models.User;
 import com.invetronix.backend.registroUsuario.repositories.ClienteRepository;
 import lombok.RequiredArgsConstructor;

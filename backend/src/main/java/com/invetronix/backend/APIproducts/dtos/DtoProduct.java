@@ -1,5 +1,7 @@
 package com.invetronix.backend.APIproducts.dtos;
 
+import com.invetronix.backend.APIsuppliers.dtos.DtoSupplier;
+
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -9,11 +11,11 @@ import lombok.Data;
 
 @Data
 @Builder
-public class DtoProduct {
+public class DtoProduct { 
     private String id;
 
     @NotBlank(message = "El nombre no puede estar vacio")
-    private String name;
+    private String name; 
 
     @NotBlank(message = "La descripcion no puede estar vacia")
     private String description;
