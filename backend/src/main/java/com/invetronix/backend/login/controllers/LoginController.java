@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.invetronix.backend.login.exceptions.InvalidCredentialsException;
+import com.invetronix.backend.login.services.ILoginService;
 import com.invetronix.backend.login.services.LoginService;
 import com.invetronix.backend.registroUsuario.exceptions.UserNotFoundException;
 import com.invetronix.backend.registroUsuario.models.User;
@@ -15,15 +15,15 @@ import com.invetronix.backend.shared.controllers.ErrorResponse;
 
 @RestController
 public class LoginController {
-    private final LoginService loginService;
+    private final ILoginService loginService;
 
     @Autowired
     public LoginController(LoginService loginService) {
         this.loginService = loginService;
     }
- 
+
     @GetMapping("/login")
-    public ResponseEntity<?> login(@RequestParam("correo") String correo, 
+    public ResponseEntity<?> login(@RequestParam("correo") String correo,
                         @RequestParam("contraseña") String contraseña) {
 
             try {
