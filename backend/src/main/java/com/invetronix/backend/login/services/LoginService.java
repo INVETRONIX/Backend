@@ -4,15 +4,13 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import com.invetronix.backend.login.exceptions.InvalidCredentialsException;
 import com.invetronix.backend.registroUsuario.exceptions.UserNotFoundException;
-import com.invetronix.backend.registroUsuario.models.Administrador;
-import com.invetronix.backend.registroUsuario.models.Cliente;
 import com.invetronix.backend.registroUsuario.models.User;
 import com.invetronix.backend.registroUsuario.repositories.ClienteRepository;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class LoginService {
+public class LoginService implements ILoginService{
     
     private final ClienteRepository clienteRepository;
 
@@ -24,16 +22,23 @@ public class LoginService {
         return user;
     }
 
-    private void verificarSiUsuarioExiste(String email, Optional<User> userOptional){
+    @Override
+    public User login(User user) {
+        return clienteRepository.save(user);
+    }
+
+    @Override
+    public void verificarSiUsuarioExiste(String email, Optional<User> userOptional) {
         if(!userOptional.isPresent()){
             throw new UserNotFoundException("el usuario con email:" +email + "no existe");
         }
     }
 
-    private void validatePassword(String password, String passwordDB){
+    @Override
+    public void validatePassword(String password, String passwordDB) {
         if(!password.equals(passwordDB)){
             throw new InvalidCredentialsException("Invalid password");
         }
-    }
 
+    }
 }
