@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class LoginService {
+public class LoginService implements ILoginService{
     
     private final ClienteRepository clienteRepository;
 
@@ -22,16 +22,23 @@ public class LoginService {
         return user;
     }
 
-    private void verificarSiUsuarioExiste(String email, Optional<User> userOptional){
+    @Override
+    public User login(User user) {
+        return clienteRepository.save(user);
+    }
+
+    @Override
+    public void verificarSiUsuarioExiste(String email, Optional<User> userOptional) {
         if(!userOptional.isPresent()){
             throw new UserNotFoundException("el usuario con email:" +email + "no existe");
         }
     }
 
-    private void validatePassword(String password, String passwordDB){
+    @Override
+    public void validatePassword(String password, String passwordDB) {
         if(!password.equals(passwordDB)){
             throw new InvalidCredentialsException("Invalid password");
         }
-    }
 
+    }
 }
