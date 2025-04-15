@@ -12,7 +12,7 @@ import com.invetronix.backend.APIproducts.data.Data;
 
 @Repository
 public class RepositoryProduct {
-    private final Map<String, EntityProduct> db = Data.getInstance().read();
+    private final Map<String, EntityProduct> db = Data.getInstance().read(); 
 
     //metodo para guardar un cliente
     public EntityProduct save(EntityProduct product) { 

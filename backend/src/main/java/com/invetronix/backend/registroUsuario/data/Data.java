@@ -7,7 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.HashMap;
-import com.invetronix.backend.registroUsuario.models.User;
+import com.invetronix.backend.registroUsuario.entities.EntityClient;
 
 public class Data implements Serializable {
     private static Data instance;
@@ -21,9 +21,9 @@ public class Data implements Serializable {
         return instance;
     }
 
-    public void write(HashMap<String, User> db) {
+    public void write(HashMap<String, EntityClient> db) {
         try{
-            FileOutputStream file = new FileOutputStream("DataUsers.dat");
+            FileOutputStream file = new FileOutputStream("DBClientes.dat");
             ObjectOutputStream escritor = new ObjectOutputStream(file);
             escritor.writeObject(db);
         }catch(IOException ex){
@@ -31,14 +31,14 @@ public class Data implements Serializable {
         }
     }
 
-    public HashMap<String, User> read() {
+    public HashMap<String, EntityClient> read() {
         try {
-            FileInputStream file = new FileInputStream("DataUsers.dat");
+            FileInputStream file = new FileInputStream("DBClientes.dat");
             ObjectInputStream lector = new ObjectInputStream(file);
-            return (HashMap<String, User>) lector.readObject();
+            return (HashMap<String, EntityClient>) lector.readObject();
         }  catch (IOException | ClassNotFoundException ex) {
             ex.printStackTrace();
-            return new HashMap<String, User>();
+            return new HashMap<String, EntityClient>();
         }
     }
 

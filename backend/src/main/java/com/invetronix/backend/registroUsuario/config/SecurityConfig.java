@@ -1,4 +1,4 @@
-package com.invetronix.backend.registroUsuario.config.security;
+package com.invetronix.backend.registroUsuario.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
