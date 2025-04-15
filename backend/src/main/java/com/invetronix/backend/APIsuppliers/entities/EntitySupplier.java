@@ -1,4 +1,4 @@
-package com.invetronix.backend.APIproducts.entities;
+package com.invetronix.backend.APIsuppliers.entities;
 
 import java.io.Serializable;
 import java.util.UUID;

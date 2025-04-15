@@ -31,12 +31,10 @@ import lombok.RequiredArgsConstructor;
 
 @Tag(name = "Productos", description = "API para gestión de productos")
 @RequiredArgsConstructor
-@RequestMapping("api/products")
+@RequestMapping("/api/products")
 @RestController
 public class ControllerProduct {
     private final IServiceProduct serviceProduct;
-
-
 
     @Operation(
         summary = "Crear un nuevo producto",

@@ -1,29 +1,28 @@
-package com.invetronix.backend.registroUsuario.data;
+package com.invetronix.backend.APIsuppliers.data;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.HashMap;
-import com.invetronix.backend.registroUsuario.entities.EntityClient;
+import com.invetronix.backend.APIsuppliers.entities.EntitySupplier;
 
-public class Data implements Serializable {
+public class Data {
     private static Data instance;
 
-    private Data() {}
+    private Data(){}
 
-    public static Data getInstance() {
+    public static Data getInstance(){
         if (instance == null) {
             instance = new Data();
         }
         return instance;
     }
 
-    public void write(HashMap<String, EntityClient> db) {
+     public void write(HashMap<String, EntitySupplier> db) {
         try{
-            FileOutputStream file = new FileOutputStream("DBClientes.dat");
+            FileOutputStream file = new FileOutputStream("DataProducts.dat");
             ObjectOutputStream escritor = new ObjectOutputStream(file);
             escritor.writeObject(db);
         }catch(IOException ex){
@@ -31,15 +30,14 @@ public class Data implements Serializable {
         }
     }
 
-    public HashMap<String, EntityClient> read() {
+    public HashMap<String, EntitySupplier> read() {
         try {
-            FileInputStream file = new FileInputStream("DBClientes.dat");
+            FileInputStream file = new FileInputStream("DataProducts.dat");
             ObjectInputStream lector = new ObjectInputStream(file);
-            return (HashMap<String, EntityClient>) lector.readObject();
+            return (HashMap<String, EntitySupplier>) lector.readObject();
         }  catch (IOException | ClassNotFoundException ex) {
             ex.printStackTrace();
-            return new HashMap<String, EntityClient>();
+            return new HashMap<String, EntitySupplier>();
         }
     }
-
 }

@@ -2,19 +2,20 @@ package com.invetronix.backend.APIproducts.services;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.Optional; 
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import com.invetronix.backend.APIproducts.entities.EntityProduct;
 import com.invetronix.backend.APIproducts.mappers.MapperProduct;
-import com.invetronix.backend.APIproducts.mappers.MapperSupplier;
 import com.invetronix.backend.APIproducts.models.Product;
 import com.invetronix.backend.APIproducts.repositories.RepositoryProduct;
+import com.invetronix.backend.APIsuppliers.mappers.MapperSupplier;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
 public class ServiceProduct implements IServiceProduct{
+    
     private final RepositoryProduct repositoryProduct;
     private final IValidationsServiceProduct validationsServiceProduct;
 
