@@ -7,9 +7,6 @@ import com.invetronix.backend.registroUsuario.models.Client;
 import com.invetronix.backend.registroUsuario.repositories.RepositoryRegister;
 import com.invetronix.backend.registroUsuario.services.in.IFindUserById;
 
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
 public class FindUserById implements IFindUserById{
     private final RepositoryRegister repositoryRegister;
     private final ValidationServiceRegister validationServiceRegister;
@@ -20,5 +17,12 @@ public class FindUserById implements IFindUserById{
         validationServiceRegister.validateUserExistsById(entity, id);
         return Optional.of(MapperUser.toModel(entity.get()));
     }
+
+    public FindUserById(RepositoryRegister repositoryRegister, ValidationServiceRegister validationServiceRegister) {
+        this.repositoryRegister = repositoryRegister;
+        this.validationServiceRegister = validationServiceRegister;
+    }
+
+    
     
 }

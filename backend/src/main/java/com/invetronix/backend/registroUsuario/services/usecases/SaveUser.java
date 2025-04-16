@@ -6,9 +6,6 @@ import com.invetronix.backend.registroUsuario.models.Client;
 import com.invetronix.backend.registroUsuario.repositories.RepositoryRegister;
 import com.invetronix.backend.registroUsuario.services.in.ISaveUser;
 
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
 public class SaveUser implements ISaveUser{
     private final RepositoryRegister repositoryRegister;
     private final ValidationServiceRegister validationServiceRegister;
@@ -19,6 +16,11 @@ public class SaveUser implements ISaveUser{
         client.setName(client.getName().toLowerCase());
         EntityClient entityClient = MapperUser.toEntity(client);
         return MapperUser.toModel(repositoryRegister.save(entityClient));
+    }
+
+    public SaveUser(RepositoryRegister repositoryRegister2, ValidationServiceRegister validationServiceRegister2) {
+        this.repositoryRegister= repositoryRegister2;
+        this.validationServiceRegister= validationServiceRegister2;
     }
     
 }

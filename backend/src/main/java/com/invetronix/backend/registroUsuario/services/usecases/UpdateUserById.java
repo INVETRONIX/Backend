@@ -7,9 +7,6 @@ import com.invetronix.backend.registroUsuario.models.Client;
 import com.invetronix.backend.registroUsuario.repositories.RepositoryRegister;
 import com.invetronix.backend.registroUsuario.services.in.IUpdateUserById;
 
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
 public class UpdateUserById implements IUpdateUserById{
     private final RepositoryRegister repositoryRegister;
     private final ValidationServiceRegister validationServiceRegister;
@@ -29,5 +26,12 @@ public class UpdateUserById implements IUpdateUserById{
         return repositoryRegister.update(entityToUpdate)
                 .map(MapperUser::toModel);
     }
+
+    public UpdateUserById(RepositoryRegister repositoryRegister, ValidationServiceRegister validationServiceRegister) {
+        this.repositoryRegister = repositoryRegister;
+        this.validationServiceRegister = validationServiceRegister;
+    }
+
+    
     
 }

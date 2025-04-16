@@ -7,9 +7,7 @@ import com.invetronix.backend.registroUsuario.models.Client;
 import com.invetronix.backend.registroUsuario.repositories.RepositoryRegister;
 import com.invetronix.backend.registroUsuario.services.in.IFindAllUsers;
 
-import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 public class FindAllUsers implements IFindAllUsers {
     private final RepositoryRegister repositoryRegister;
 
@@ -19,5 +17,10 @@ public class FindAllUsers implements IFindAllUsers {
                 .map(MapperUser::toModel)
                 .collect(Collectors.toList());
     }
+
+    public FindAllUsers(RepositoryRegister repositoryRegister) {
+        this.repositoryRegister = repositoryRegister;
+    }
+    
     
 }

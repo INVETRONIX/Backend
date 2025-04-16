@@ -7,9 +7,6 @@ import com.invetronix.backend.registroUsuario.models.Client;
 import com.invetronix.backend.registroUsuario.repositories.RepositoryRegister;
 import com.invetronix.backend.registroUsuario.services.in.IFindUserByEmail;
 
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
 public class FindUserByEmail implements IFindUserByEmail{
     private final RepositoryRegister repositoryRegister;
     private final ValidationServiceRegister validationServiceRegister;
@@ -20,5 +17,11 @@ public class FindUserByEmail implements IFindUserByEmail{
         validationServiceRegister.validateUserExistsByEmail(entity, email);
         return Optional.of(MapperUser.toModel(entity.get()));
     }
+
+    public FindUserByEmail(RepositoryRegister repositoryRegister, ValidationServiceRegister validationServiceRegister) {
+        this.repositoryRegister = repositoryRegister;
+        this.validationServiceRegister = validationServiceRegister;
+    }
+    
     
 }

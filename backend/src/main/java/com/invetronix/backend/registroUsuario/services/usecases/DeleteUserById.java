@@ -7,9 +7,6 @@ import com.invetronix.backend.registroUsuario.models.Client;
 import com.invetronix.backend.registroUsuario.repositories.RepositoryRegister;
 import com.invetronix.backend.registroUsuario.services.in.IDeleteUserById;
 
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
 public class DeleteUserById implements IDeleteUserById{
     private final RepositoryRegister repositoryRegister;
     private final ValidationServiceRegister validationServiceRegister;
@@ -21,5 +18,12 @@ public class DeleteUserById implements IDeleteUserById{
         repositoryRegister.delete(id);
         return Optional.of(MapperUser.toModel(entity.get()));
     }
+
+    public DeleteUserById(RepositoryRegister repositoryRegister, ValidationServiceRegister validationServiceRegister) {
+        this.repositoryRegister = repositoryRegister;
+        this.validationServiceRegister = validationServiceRegister;
+    }
+
+    
     
 }

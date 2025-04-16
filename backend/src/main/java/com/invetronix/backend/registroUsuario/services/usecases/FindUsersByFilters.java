@@ -8,9 +8,7 @@ import com.invetronix.backend.registroUsuario.models.Client;
 import com.invetronix.backend.registroUsuario.repositories.RepositoryRegister;
 import com.invetronix.backend.registroUsuario.services.in.IFindUsersByFilters;
 
-import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 public class FindUsersByFilters implements IFindUsersByFilters{
     private final RepositoryRegister repositoryRegister;
 
@@ -24,5 +22,10 @@ public class FindUsersByFilters implements IFindUsersByFilters{
                 .map(MapperUser::toModel)
                 .collect(Collectors.toList());
     }
+
+    public FindUsersByFilters(RepositoryRegister repositoryRegister) {
+        this.repositoryRegister = repositoryRegister;
+    }
+
     
 }

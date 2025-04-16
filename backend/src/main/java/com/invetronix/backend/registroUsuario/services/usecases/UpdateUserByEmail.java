@@ -7,9 +7,6 @@ import com.invetronix.backend.registroUsuario.models.Client;
 import com.invetronix.backend.registroUsuario.repositories.RepositoryRegister;
 import com.invetronix.backend.registroUsuario.services.in.IUpdateUserByEmail;
 
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
 public class UpdateUserByEmail implements IUpdateUserByEmail{
     private final RepositoryRegister repositoryRegister;
     private final ValidationServiceRegister validationServiceRegister;
@@ -29,5 +26,13 @@ public class UpdateUserByEmail implements IUpdateUserByEmail{
         return repositoryRegister.update(entityToUpdate)
                 .map(MapperUser::toModel);
     }
+
+    public UpdateUserByEmail(RepositoryRegister repositoryRegister,
+            ValidationServiceRegister validationServiceRegister) {
+        this.repositoryRegister = repositoryRegister;
+        this.validationServiceRegister = validationServiceRegister;
+    }
+
+    
     
 }
