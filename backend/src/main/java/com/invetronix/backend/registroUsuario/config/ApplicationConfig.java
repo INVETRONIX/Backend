@@ -2,7 +2,6 @@ package com.invetronix.backend.registroUsuario.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import com.invetronix.backend.registroUsuario.repositories.RepositoryRegister;
 import com.invetronix.backend.registroUsuario.services.ServiceRegister;
 import com.invetronix.backend.registroUsuario.services.usecases.DeleteUserByEmail;
