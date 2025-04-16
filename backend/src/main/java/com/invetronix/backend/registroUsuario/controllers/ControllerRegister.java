@@ -18,7 +18,7 @@ import com.invetronix.backend.registroUsuario.exceptions.UserAlreadyRegisteredEx
 import com.invetronix.backend.registroUsuario.exceptions.UserNotFoundException;
 import com.invetronix.backend.registroUsuario.mappers.MapperUser;
 import com.invetronix.backend.registroUsuario.models.Client;
-import com.invetronix.backend.registroUsuario.services.IServiceRegister;
+import com.invetronix.backend.registroUsuario.services.ServiceRegister;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -26,10 +26,10 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/register")
 @RestController
 public class ControllerRegister {
-    private final IServiceRegister serviceRegister;
+    private final ServiceRegister serviceRegister;
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody DtoClient dtoUser) {
+    public ResponseEntity<?> save(@RequestBody @Valid DtoClient dtoUser) {
          try {
 
             Client user= MapperUser.toModel(dtoUser);
