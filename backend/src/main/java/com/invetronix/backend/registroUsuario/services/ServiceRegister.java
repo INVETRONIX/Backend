@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class ServiceRegister {
+public class ServiceRegister implements IServiceRegister {
     private final RepositoryRegister repositoryRegister;
 
     public Client save(Client client){
@@ -75,6 +75,15 @@ public class ServiceRegister {
         return Optional.of(MapperUser.toModel(entity.get()));
     }
 
+    public Optional<Client> deleteByEmail(String email){
+        Optional<EntityClient> entity = repositoryRegister.findByEmail(email);
+        if(!entity.isPresent()){
+            throw new UserNotFoundException("El usuario con email: " + email + " no existe");
+        }
+        repositoryRegister.delete(entity.get().getId());
+        return Optional.of(MapperUser.toModel(entity.get()));
+    }
+
     public Optional<Client> updateById(String id, Client client){
         Optional<EntityClient> entity = repositoryRegister.findById(id);
         if(!entity.isPresent()){
@@ -90,6 +99,26 @@ public class ServiceRegister {
         Client userUpdated = MapperUser.toModel(repositoryRegister.update(entity.get()).get());
         return Optional.of(userUpdated);
     
+    }
+
+    public Optional<Client> updateByEmail(String email, Client client){
+        Optional<EntityClient> entity = repositoryRegister.findByEmail(email);
+        if(!entity.isPresent()){
+            throw new UserNotFoundException("El usuario con email: " + email + " no existe");
+        }
+            entity.get().setName(client.getName());
+            entity.get().setEmail(client.getEmail());
+            entity.get().setPhone(client.getPhone());
+            entity.get().setAge(client.getAge());
+            entity.get().setPassword(client.getPassword());
+            Client userUpdated = MapperUser.toModel(repositoryRegister.update(entity.get()).get());
+            return Optional.of(userUpdated);
+        
+    }
+
+
+    public boolean findByAuthToken(String token){
+        return repositoryRegister.findByAuthToken(token);
     }
 
 }
