@@ -2,6 +2,7 @@ package com.invetronix.backend.registroUsuario.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import com.invetronix.backend.registroUsuario.repositories.RepositoryRegister;
 import com.invetronix.backend.registroUsuario.services.ServiceRegister;
 import com.invetronix.backend.registroUsuario.services.usecases.DeleteUserByEmail;
@@ -20,8 +21,8 @@ import com.invetronix.backend.registroUsuario.services.usecases.ValidationServic
 public class ApplicationConfig {
     
     @Bean
-    public ServiceRegister serviceRegister(RepositoryRegister repositoryRegister, ValidationServiceRegister validationServiceRegister) {
-        return new ServiceRegister(new SaveUser(repositoryRegister, validationServiceRegister), 
+    public ServiceRegister serviceRegister(RepositoryRegister repositoryRegister, ValidationServiceRegister validationServiceRegister, PasswordEncoder passwordEncoder) {
+        return new ServiceRegister(new SaveUser(repositoryRegister, validationServiceRegister, passwordEncoder), 
         new FindUserById(repositoryRegister, validationServiceRegister), new FindUserByEmail(repositoryRegister, validationServiceRegister), 
         new DeleteUserById(repositoryRegister, validationServiceRegister), new DeleteUserByEmail(repositoryRegister, validationServiceRegister), 
         new UpdateUserById(repositoryRegister, validationServiceRegister), new UpdateUserByEmail(repositoryRegister, validationServiceRegister), new FindAllUsers(repositoryRegister), 

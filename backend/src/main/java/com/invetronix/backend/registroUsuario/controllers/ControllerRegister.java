@@ -1,220 +1,220 @@
 package com.invetronix.backend.registroUsuario.controllers;
 
-import java.util.List;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import com.invetronix.backend.registroUsuario.controllers.components.DeleteOperations;
+import com.invetronix.backend.registroUsuario.controllers.components.GetOperations;
+import com.invetronix.backend.registroUsuario.controllers.components.PostOperations;
+import com.invetronix.backend.registroUsuario.controllers.components.PutOperations;
 import com.invetronix.backend.registroUsuario.dto.DtoClient;
-import com.invetronix.backend.registroUsuario.exceptions.UserAlreadyRegisteredException;
-import com.invetronix.backend.registroUsuario.exceptions.UserNotFoundException;
-import com.invetronix.backend.registroUsuario.mappers.MapperUser;
-import com.invetronix.backend.registroUsuario.models.Client;
-import com.invetronix.backend.registroUsuario.services.ServiceRegister;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+@Tag(name = "Registro de Usuario", description = "API para operaciones CRUD sobre usuarios registrados")
 @RequiredArgsConstructor
 @RequestMapping("/api/register")
 @RestController
 public class ControllerRegister {
-    private final ServiceRegister serviceRegister;
+    private final PostOperations postOperations;
+    private final GetOperations getOperations;
+    private final PutOperations putOperations;
+    private final DeleteOperations deleteOperations;
 
+    @Operation(summary = "Registrar un nuevo usuario")
+    @ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "Descripción de éxito"),
+    @ApiResponse(responseCode = "400", description = "Solicitud inválida",
+        content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+    @ApiResponse(responseCode = "401", description = "No autorizado",
+        content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+    @ApiResponse(responseCode = "404", description = "No encontrado",
+        content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+    @ApiResponse(responseCode = "409", description = "Conflicto",
+        content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+    @ApiResponse(responseCode = "500", description = "Error interno del servidor",
+        content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+    })
     @PostMapping
     public ResponseEntity<?> save(@RequestBody @Valid DtoClient dtoUser) {
-         try {
-
-            Client user= MapperUser.toModel(dtoUser);
-
-            Client saved = serviceRegister.save(user);
-
-            DtoClient userSaved = MapperUser.toDto(saved);
-
-            return new ResponseEntity<>(userSaved, HttpStatus.CREATED);
-
-        } catch (UserAlreadyRegisteredException e) {
-
-            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), HttpStatus.CONFLICT);
-            return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
-
-        }catch (RuntimeException e){
-
-            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return postOperations.save(dtoUser);
     }
 
+    @Operation(summary = "Buscar usuario por ID")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Descripción de éxito"),
+        @ApiResponse(responseCode = "400", description = "Solicitud inválida",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "401", description = "No autorizado",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "404", description = "No encontrado",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "409", description = "Conflicto",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+    })
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(
-        @PathVariable String id
-    ) {
-        try {
-            return serviceRegister.findById(id)
-                .map(user -> new ResponseEntity<>(MapperUser.toDto(user), HttpStatus.OK))
-                .orElseThrow(() -> new RuntimeException("Error inesperado: usuario no encontrado después de validación"));
-        } catch (UserNotFoundException e) {
-            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), HttpStatus.NOT_FOUND);
-            return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
-        } catch (RuntimeException e) {
-            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public ResponseEntity<?> findById(@PathVariable String id) {
+        return getOperations.findById(id);
     }
 
-   
+    @Operation(summary = "Buscar usuario por email")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Descripción de éxito"),
+        @ApiResponse(responseCode = "400", description = "Solicitud inválida",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "401", description = "No autorizado",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "404", description = "No encontrado",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "409", description = "Conflicto",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+    })
     @GetMapping("/by-email/{email}")
-    public ResponseEntity<?> findByEmail(
-        @PathVariable String email
-    ) {
-        try {
-            return serviceRegister.findByEmail(email)
-                .map(user -> new ResponseEntity<>(MapperUser.toDto(user), HttpStatus.OK))
-                .orElseThrow(() -> new RuntimeException("Error inesperado: usuario no encontrado después de validación"));
-        } catch (UserNotFoundException e) {
-            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), HttpStatus.NOT_FOUND);
-            return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
-        } catch (RuntimeException e) {
-            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public ResponseEntity<?> findByEmail(@PathVariable String email) {
+        return getOperations.findByEmail(email);
     }
 
-   
+    @Operation(summary = "Listar todos los usuarios registrados")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Descripción de éxito"),
+        @ApiResponse(responseCode = "400", description = "Solicitud inválida",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "401", description = "No autorizado",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "404", description = "No encontrado",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "409", description = "Conflicto",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+    })
     @GetMapping
     public ResponseEntity<?> findAll() {
-        try {
-            List<Client> users = serviceRegister.findAll();
-            List<DtoClient> usersDto = users.stream()
-                    .map(MapperUser::toDto)
-                    .toList();
-
-            return usersDto.isEmpty() 
-                ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
-                : new ResponseEntity<>(usersDto, HttpStatus.OK);
-        } catch (UserNotFoundException e) {
-
-            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), HttpStatus.NOT_FOUND); 
-            return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
-
-        } catch (RuntimeException e) {
-
-            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-            
-        }
+        return getOperations.findAll();
     }
 
-    
-    @PutMapping("updateById/{id}")
-    public ResponseEntity<?> update(
-        @PathVariable String id,
-        @Valid @RequestBody DtoClient userDto
-    ) {
-        try {
-            Client userUpdate = MapperUser.toModel(userDto);
-            return serviceRegister.updateById(id, userUpdate)
-                .map(user -> new ResponseEntity<>(MapperUser.toDto(user), HttpStatus.OK))
-                .orElseThrow(() -> new RuntimeException("Error inesperado: usuario no encontrado después de validación"));
-        } catch (UserNotFoundException e) {
-            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), HttpStatus.NOT_FOUND);
-            return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
-        } catch (UserAlreadyRegisteredException e) {
-            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), HttpStatus.CONFLICT);
-            return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
-        } catch (RuntimeException e) {
-            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @Operation(summary = "Actualizar usuario por ID")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Descripción de éxito"),
+        @ApiResponse(responseCode = "400", description = "Solicitud inválida",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "401", description = "No autorizado",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "404", description = "No encontrado",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "409", description = "Conflicto",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+    })
+    @PutMapping("/updateById/{id}")
+    public ResponseEntity<?> updateById(@PathVariable String id, @Valid @RequestBody DtoClient userDto) {
+        return putOperations.updateById(id, userDto);
     }
 
-    @PutMapping("updateByEmail/{email}")
-    public ResponseEntity<?> updateByEmail(@PathVariable String email, @Valid @RequestBody DtoClient userDto){
-        try {
-            Client userUpdate = MapperUser.toModel(userDto);
-            return serviceRegister.updateByEmail(email, userUpdate)
-            .map(user -> new ResponseEntity<>(MapperUser.toDto(user), HttpStatus.OK))
-            .orElseThrow(() -> new RuntimeException("Error inesperado: usuario no encontrado después de validación"));
-        } catch (UserNotFoundException e) {
-            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), HttpStatus.NOT_FOUND);
-            return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
-        } catch (UserAlreadyRegisteredException e) {
-            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), HttpStatus.CONFLICT);
-            return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
-        } catch (RuntimeException e) {
-            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @Operation(summary = "Actualizar usuario por email")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Descripción de éxito"),
+        @ApiResponse(responseCode = "400", description = "Solicitud inválida",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "401", description = "No autorizado",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "404", description = "No encontrado",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "409", description = "Conflicto",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+    })
+    @PutMapping("/updateByEmail/{email}")
+    public ResponseEntity<?> updateByEmail(@PathVariable String email, @Valid @RequestBody DtoClient userDto) {
+        return putOperations.updateByEmail(email, userDto);
     }
 
-    
+    @Operation(summary = "Eliminar usuario por ID")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Descripción de éxito"),
+        @ApiResponse(responseCode = "400", description = "Solicitud inválida",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "401", description = "No autorizado",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "404", description = "No encontrado",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "409", description = "Conflicto",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+    })
     @DeleteMapping("/deleteById/{id}")
-    public ResponseEntity<?> deleteById(
-        @PathVariable String id
-    ) {
-        try {
-            return serviceRegister.deleteById(id)
-                .map(user -> new ResponseEntity<>(MapperUser.toDto(user), HttpStatus.OK))
-                .orElseThrow(() -> new RuntimeException("Error inesperado: usuario no encontrado después de validación"));
-        } catch (UserNotFoundException e) {
-            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), HttpStatus.NOT_FOUND);
-            return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
-        } catch (RuntimeException e) {
-            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public ResponseEntity<?> deleteById(@PathVariable String id) {
+        return deleteOperations.deleteById(id);
     }
 
+    @Operation(summary = "Eliminar usuario por email")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Descripción de éxito"),
+        @ApiResponse(responseCode = "400", description = "Solicitud inválida",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "401", description = "No autorizado",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "404", description = "No encontrado",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "409", description = "Conflicto",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+    })
     @DeleteMapping("/deleteByEmail/{email}")
     public ResponseEntity<?> deleteByEmail(@PathVariable String email) {
-        try {
-            return serviceRegister.deleteByEmail(email)
-            .map(user -> new ResponseEntity<>(MapperUser.toDto(user), HttpStatus.OK))
-            .orElseThrow(() -> new RuntimeException("Error inesperado: usuario no encontrado después de validación"));
-        } catch (UserNotFoundException e) {
-            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), HttpStatus.NOT_FOUND);
-            return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
-        } catch (RuntimeException e) {
-            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return deleteOperations.deleteByEmail(email);
     }
 
-    
+    @Operation(summary = "Buscar usuarios por filtros opcionales (nombre, email)")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Descripción de éxito"),
+        @ApiResponse(responseCode = "400", description = "Solicitud inválida",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "401", description = "No autorizado",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "404", description = "No encontrado",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "409", description = "Conflicto",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+    })
     @GetMapping("/search")
     public ResponseEntity<?> findByFilters(
-        @RequestParam(required = false) String name,
-        @RequestParam(required = false) String email
-    ) {
-        try {
-            List<Client> users = serviceRegister.findByFilters(name, email);
-            List<DtoClient> usersDto = users.stream()
-                    .map(MapperUser::toDto)
-                    .toList();
-
-            return usersDto.isEmpty() 
-                ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
-                : new ResponseEntity<>(usersDto, HttpStatus.OK);
-        } catch (UserNotFoundException e) {
-            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), HttpStatus.NOT_FOUND);
-            return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
-        } catch (RuntimeException e) {
-            ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String email) {
+        return getOperations.findByFilters(name, email);
     }
 
+    @Operation(summary = "Obtener usuario por token de autenticación")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Descripción de éxito"),
+        @ApiResponse(responseCode = "400", description = "Solicitud inválida",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "401", description = "No autorizado",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "404", description = "No encontrado",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "409", description = "Conflicto",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor",
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+    })
     @GetMapping("/auth")
     public ResponseEntity<?> findByAuthToken(@RequestHeader("Authorization") String token) {
-        boolean isValid = serviceRegister.findByAuthToken(token);
-        String message = isValid ? "Token válido" : "Token inválido";
-        return new ResponseEntity<>(message, isValid ? HttpStatus.OK : HttpStatus.UNAUTHORIZED);
+        return getOperations.findByAuthToken(token);
     }
 }

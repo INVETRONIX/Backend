@@ -23,7 +23,5 @@ public class DeleteUserById implements IDeleteUserById{
         this.repositoryRegister = repositoryRegister;
         this.validationServiceRegister = validationServiceRegister;
     }
-
-    
     
 }

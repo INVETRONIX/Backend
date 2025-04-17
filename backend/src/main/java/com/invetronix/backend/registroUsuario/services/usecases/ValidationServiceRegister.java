@@ -7,7 +7,6 @@ import com.invetronix.backend.registroUsuario.exceptions.UserAlreadyRegisteredEx
 import com.invetronix.backend.registroUsuario.exceptions.UserNotFoundException;
 import com.invetronix.backend.registroUsuario.repositories.RepositoryRegister;
 import com.invetronix.backend.registroUsuario.services.in.IValidationServiceRegister;
-
 import lombok.RequiredArgsConstructor;
 
 @Service

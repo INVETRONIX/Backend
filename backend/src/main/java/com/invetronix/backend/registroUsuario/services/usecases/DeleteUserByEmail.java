@@ -24,7 +24,5 @@ public class DeleteUserByEmail implements IDeleteUserByEmail{
         this.repositoryRegister = repositoryRegister;
         this.validationServiceRegister = validationServiceRegister;
     }
-
-    
     
 }
