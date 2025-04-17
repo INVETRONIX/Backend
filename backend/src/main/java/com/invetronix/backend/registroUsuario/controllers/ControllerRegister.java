@@ -2,11 +2,12 @@ package com.invetronix.backend.registroUsuario.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.invetronix.backend.registroUsuario.controllers.components.DeleteOperations;
-import com.invetronix.backend.registroUsuario.controllers.components.GetOperations;
-import com.invetronix.backend.registroUsuario.controllers.components.PostOperations;
-import com.invetronix.backend.registroUsuario.controllers.components.PutOperations;
+import com.invetronix.backend.registroUsuario.controllers.in.IDeleteOperations;
+import com.invetronix.backend.registroUsuario.controllers.in.IGetOperations;
+import com.invetronix.backend.registroUsuario.controllers.in.IPostOperations;
+import com.invetronix.backend.registroUsuario.controllers.in.IPutOperations;
 import com.invetronix.backend.registroUsuario.dto.DtoClient;
+import com.invetronix.backend.shared.controllers.ErrorResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -21,10 +22,10 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/register")
 @RestController
 public class ControllerRegister {
-    private final PostOperations postOperations;
-    private final GetOperations getOperations;
-    private final PutOperations putOperations;
-    private final DeleteOperations deleteOperations;
+    private final IPostOperations postOperations;
+    private final IGetOperations getOperations;
+    private final IPutOperations putOperations;
+    private final IDeleteOperations deleteOperations;
 
     @Operation(summary = "Registrar un nuevo usuario")
     @ApiResponses(value = {

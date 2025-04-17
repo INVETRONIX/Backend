@@ -42,7 +42,7 @@ public class ControllerLogin {
             @RequestParam String password
         ){
         try {
-            Optional <Client> user = serviceLogin.login(email, password);
+            Optional <Client> user = serviceLogin.loginClient(email, password);
 
             return user
             .map(u -> new ResponseEntity<>(MapperUser.toDto(u), HttpStatus.OK))

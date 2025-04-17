@@ -18,7 +18,7 @@ public class ServiceLogin implements IServiceLogin {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public Optional<Client> login(String email, String password) {
+    public Optional<Client> loginClient(String email, String password) {
         EntityClient entityClient = findUserByEmail(email);
         validatePassword(password, entityClient.getPassword());
         return Optional.of(MapperUser.toModel(entityClient));
@@ -37,4 +37,5 @@ public class ServiceLogin implements IServiceLogin {
             throw new InvalidPasswordException("Invalid password");
         }
     }
+
 }

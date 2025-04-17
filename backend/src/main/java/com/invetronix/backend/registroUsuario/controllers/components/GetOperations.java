@@ -4,17 +4,18 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import com.invetronix.backend.registroUsuario.controllers.ErrorResponse;
+import com.invetronix.backend.registroUsuario.controllers.in.IGetOperations;
 import com.invetronix.backend.registroUsuario.dto.DtoClient;
 import com.invetronix.backend.registroUsuario.exceptions.UserNotFoundException;
 import com.invetronix.backend.registroUsuario.mappers.MapperUser;
 import com.invetronix.backend.registroUsuario.models.Client;
 import com.invetronix.backend.registroUsuario.services.ServiceRegister;
+import com.invetronix.backend.shared.controllers.ErrorResponse;
 import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-public class GetOperations {
+public class GetOperations implements IGetOperations{
     private final ServiceRegister serviceRegister;
 
     public ResponseEntity<?> findById(String id) {

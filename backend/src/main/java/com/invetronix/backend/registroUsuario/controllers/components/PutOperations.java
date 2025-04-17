@@ -3,18 +3,20 @@ package com.invetronix.backend.registroUsuario.controllers.components;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import com.invetronix.backend.registroUsuario.controllers.ErrorResponse;
+import com.invetronix.backend.registroUsuario.controllers.in.IPutOperations;
 import com.invetronix.backend.registroUsuario.dto.DtoClient;
 import com.invetronix.backend.registroUsuario.exceptions.UserAlreadyRegisteredException;
 import com.invetronix.backend.registroUsuario.exceptions.UserNotFoundException;
 import com.invetronix.backend.registroUsuario.mappers.MapperUser;
 import com.invetronix.backend.registroUsuario.models.Client;
 import com.invetronix.backend.registroUsuario.services.ServiceRegister;
+import com.invetronix.backend.shared.controllers.ErrorResponse;
+
 import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-public class PutOperations {
+public class PutOperations implements IPutOperations{
     private final ServiceRegister serviceRegister;
     
     public ResponseEntity<?> updateById(String id, DtoClient userDto) {
