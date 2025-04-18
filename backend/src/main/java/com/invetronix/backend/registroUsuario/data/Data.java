@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import com.invetronix.backend.registroUsuario.entities.EntityClient;
 
-public class Data implements Serializable {
+public class Data implements Serializable{
     private static Data instance;
 
     private Data() {}

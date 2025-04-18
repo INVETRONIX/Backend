@@ -1,9 +1,7 @@
 package com.invetronix.backend.registroUsuario.entities;
 
 import java.util.UUID;
-
 import lombok.Data;
-
 
 @Data
 
@@ -24,5 +22,4 @@ public class EntityClient{
         this.phone = phone;
     }
 
-    
 }

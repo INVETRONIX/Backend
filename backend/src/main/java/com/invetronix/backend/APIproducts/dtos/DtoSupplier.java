@@ -1,4 +1,4 @@
-package com.invetronix.backend.APIsuppliers.dtos;
+package com.invetronix.backend.APIproducts.dtos;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

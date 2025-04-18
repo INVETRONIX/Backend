@@ -1,12 +1,12 @@
 package com.invetronix.backend.APIproducts.models;
 
-import com.invetronix.backend.APIsuppliers.models.Supplier;
-
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Data
-@Builder
+@SuperBuilder
+@NoArgsConstructor
 public class Product {
 
     private String id;

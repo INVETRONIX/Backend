@@ -1,15 +1,19 @@
 package com.invetronix.backend.registroUsuario.services.usecases;
 
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.invetronix.backend.registroUsuario.entities.EntityClient;
 import com.invetronix.backend.registroUsuario.mappers.MapperUser;
 import com.invetronix.backend.registroUsuario.models.Client;
 import com.invetronix.backend.registroUsuario.repositories.RepositoryRegister;
 import com.invetronix.backend.registroUsuario.services.in.IUpdateUserById;
+import com.invetronix.backend.registroUsuario.services.in.IValidationServiceRegister;
 
 public class UpdateUserById implements IUpdateUserById{
     private final RepositoryRegister repositoryRegister;
-    private final ValidationServiceRegister validationServiceRegister;
+    private final IValidationServiceRegister validationServiceRegister;
 
     @Override
     public Optional<Client> updateById(String id, Client client) {
@@ -26,7 +30,8 @@ public class UpdateUserById implements IUpdateUserById{
         return repositoryRegister.update(entityToUpdate)
                 .map(MapperUser::toModel);
     }
-
+    
+    @Autowired
     public UpdateUserById(RepositoryRegister repositoryRegister, ValidationServiceRegister validationServiceRegister) {
         this.repositoryRegister = repositoryRegister;
         this.validationServiceRegister = validationServiceRegister;

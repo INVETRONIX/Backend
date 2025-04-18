@@ -1,4 +1,4 @@
-package com.invetronix.backend.APIsuppliers.models;
+package com.invetronix.backend.APIproducts.models;
 
 import lombok.Builder;
 import lombok.Data;

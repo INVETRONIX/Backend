@@ -8,6 +8,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 public class Client{
+    
     private String id;
     private String name;
     private String email;
