@@ -2,6 +2,7 @@ package com.invetronix.backend.APIproducts.services.usecases;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
 import com.invetronix.backend.APIproducts.mappers.MapperProduct;
 import com.invetronix.backend.APIproducts.models.Product;
 import com.invetronix.backend.APIproducts.repositories.RepositoryProduct;
@@ -10,6 +11,7 @@ import com.invetronix.backend.APIproducts.services.in.IFindAllProducts;
 public class FindAllProducts implements IFindAllProducts{
     private final RepositoryProduct repository;
 
+    @Autowired
     public FindAllProducts(RepositoryProduct repository) {
         this.repository = repository;
     }

@@ -1,7 +1,6 @@
 package com.invetronix.backend.APIproducts.services.usecases;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import com.invetronix.backend.APIproducts.entities.EntityProduct;
 import com.invetronix.backend.APIproducts.mappers.MapperProduct;
 import com.invetronix.backend.APIproducts.models.Product;

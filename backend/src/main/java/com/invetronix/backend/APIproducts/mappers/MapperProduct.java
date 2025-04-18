@@ -1,5 +1,7 @@
 package com.invetronix.backend.APIproducts.mappers;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import com.invetronix.backend.APIproducts.dtos.DtoProduct;
 import com.invetronix.backend.APIproducts.entities.EntityProduct;
 import com.invetronix.backend.APIproducts.models.Product;
@@ -11,7 +13,7 @@ public interface MapperProduct {
         .id(dto.getId())
         .name(dto.getName())
         .description(dto.getDescription())
-        .price(dto.getPrice())
+        .price(dto.getPrice()) 
         .category(dto.getCategory())
         .stockQuantity(dto.getStockQuantity())
         .supplier(MapperSupplier.toModel(dto.getSupplier()))
@@ -43,16 +45,41 @@ public interface MapperProduct {
 
     }
 
-    public static DtoProduct toDto(Product product){
+    public static DtoProduct toDto(Product model){
         return DtoProduct.builder()
-        .id(product.getId())
-        .name(product.getName())
-        .description(product.getDescription())
-        .price(product.getPrice())
-        .category(product.getCategory())
-        .stockQuantity(product.getStockQuantity())
-        .supplier(MapperSupplier.toDto(product.getSupplier()))
+        .id(model.getId())
+        .name(model.getName())
+        .description(model.getDescription())
+        .price(model.getPrice())
+        .category(model.getCategory())
+        .stockQuantity(model.getStockQuantity())
+        .supplier(MapperSupplier.toDto(model.getSupplier()))
         .build();
     }
+
+    public static List<Product> toModelFromDto(List<DtoProduct> dtos) {
+        return dtos.stream()
+            .map(MapperProduct::toModel)
+            .collect(Collectors.toList());
+    }
+    
+    public static List<Product> toModelFromEntity(List<EntityProduct> entities) {
+        return entities.stream()
+            .map(MapperProduct::toModel)
+            .collect(Collectors.toList());
+    }
+
+    public static List<EntityProduct> toEntityFromModel(List<Product> products) {
+        return products.stream()
+            .map(MapperProduct::toEntity)
+            .collect(Collectors.toList());
+    }
+
+    public static List<DtoProduct> toDtoFromModel(List<Product> products) {
+        return products.stream()
+        .map(MapperProduct::toDto)
+        .collect(Collectors.toList());
+    }
+
     
 }

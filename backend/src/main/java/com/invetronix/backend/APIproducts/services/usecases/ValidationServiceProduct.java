@@ -6,7 +6,7 @@ import com.invetronix.backend.APIproducts.entities.EntityProduct;
 import com.invetronix.backend.APIproducts.exceptions.ProductNotFoundException;
 import com.invetronix.backend.APIproducts.services.in.IValidationServiceProduct;
 
-@Service
+@Service 
 public class ValidationServiceProduct implements IValidationServiceProduct{
 
     @Override

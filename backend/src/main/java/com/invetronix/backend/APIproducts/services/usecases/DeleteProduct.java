@@ -7,11 +7,12 @@ import com.invetronix.backend.APIproducts.mappers.MapperProduct;
 import com.invetronix.backend.APIproducts.models.Product;
 import com.invetronix.backend.APIproducts.repositories.RepositoryProduct;
 import com.invetronix.backend.APIproducts.services.in.IDeleteProduct;
+import com.invetronix.backend.APIproducts.services.in.IValidationServiceProduct;
 
 
 public class DeleteProduct implements IDeleteProduct{
     private final RepositoryProduct repository;
-    private final ValidationServiceProduct validation;
+    private final IValidationServiceProduct validation;
 
     @Autowired
     public DeleteProduct(RepositoryProduct repository, ValidationServiceProduct validation) {

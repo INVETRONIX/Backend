@@ -14,19 +14,19 @@ import com.invetronix.backend.APIproducts.data.Data;
 public class RepositoryProduct {
     private final Map<String, EntityProduct> db = Data.getInstance().read(); 
 
-    //metodo para guardar un cliente
+    //metodo para guardar un producto
     public EntityProduct save(EntityProduct product) { 
         db.put(product.getId(), product);
         Data.getInstance().write((HashMap<String, EntityProduct>) db);
         return product;
     }
 
-    //metodo para buscar un cliente por id
+    //metodo para buscar un producto por id
     public Optional<EntityProduct> findById(String id) {
         return Optional.ofNullable(db.get(id));
     }
 
-    //metodo para eliminar un cliente
+    //metodo para eliminar un producto
     public Optional<EntityProduct> delete(String id) {
         EntityProduct removedProduct = db.remove(id);
         if (removedProduct != null) {
@@ -35,14 +35,14 @@ public class RepositoryProduct {
         return Optional.ofNullable(removedProduct);
     }
 
-    //metodo para modificar un cliente
+    //metodo para modificar un producto
     public Optional<EntityProduct> update(EntityProduct product) {
         db.put(product.getId(), product);
         Data.getInstance().write((HashMap<String, EntityProduct>) db);
         return Optional.of(product);
     }
 
-    //metodo para buscar todos los clientes
+    //metodo para buscar todos los productos
     public List<EntityProduct> findAll() {
         return new ArrayList<>(db.values());
     }

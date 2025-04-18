@@ -1,6 +1,7 @@
 package com.invetronix.backend.APIproducts.services.usecases;
 
 import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
 import com.invetronix.backend.APIproducts.entities.EntityProduct;
 import com.invetronix.backend.APIproducts.mappers.MapperProduct;
 import com.invetronix.backend.APIproducts.models.Product;
@@ -19,6 +20,7 @@ public class FindProductById implements IFindProductById{
         return Optional.of(MapperProduct.toModel(entity.get()));
 	}
 
+    @Autowired
     public FindProductById(RepositoryProduct repositoryProduct, IValidationServiceProduct validationServiceProduct) {
         this.repositoryProduct = repositoryProduct;
         this.validationServiceProduct = validationServiceProduct;
