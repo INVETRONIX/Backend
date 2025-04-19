@@ -2,7 +2,6 @@ package com.invetronix.backend.APIproducts.entities;
 
 import java.io.Serializable;
 import java.util.UUID;
-
 import lombok.Data;
 
 @Data

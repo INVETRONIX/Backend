@@ -5,4 +5,4 @@ import com.invetronix.backend.APIproducts.models.Product;
 
 public interface IUpdateProduct {
     Optional<Product> updateById(String id, Product Product);
-}
+} 

@@ -4,4 +4,4 @@ import com.invetronix.backend.APIproducts.models.Product;
 
 public interface ISaveProduct {
     Product save(Product product);
-}
+} 
