@@ -1,10 +1,14 @@
 package com.invetronix.backend.APIretuns.services.usecases;
 
 import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
 import com.invetronix.backend.APIretuns.entities.EntityDevolution;
 import com.invetronix.backend.APIretuns.exceptions.DevolutionNotFoundException;
 import com.invetronix.backend.APIretuns.services.in.IValidateServiceDevolution;
 
+@Service
 public class ValidateServiceDevolution implements IValidateServiceDevolution{
 
     @Override
