@@ -1,10 +1,14 @@
 package com.invetronix.backend.APIpurchases.services.usecases;
 
 import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
 import com.invetronix.backend.APIpurchases.entities.EntityPurchase;
 import com.invetronix.backend.APIpurchases.exceptions.PurchaseNotFoundException;
 import com.invetronix.backend.APIpurchases.services.in.IValidateServicePurchase;
 
+@Service
 public class ValidateServicePurchase implements IValidateServicePurchase{
 
     @Override
