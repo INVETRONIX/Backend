@@ -4,7 +4,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.invetronix.backend.APIproducts.entities.EntityProduct;
 import com.invetronix.backend.APIproducts.mappers.MapperProduct;
-import com.invetronix.backend.APIproducts.mappers.MapperSupplier;
 import com.invetronix.backend.APIproducts.models.Product;
 import com.invetronix.backend.APIproducts.repositories.RepositoryProduct;
 import com.invetronix.backend.APIproducts.services.in.IUpdateProduct;
@@ -31,7 +30,7 @@ public class UpdateProduct implements IUpdateProduct{
         entityProduct.setDescription(product.getDescription());
         entityProduct.setPrice(product.getPrice());
         entityProduct.setStockQuantity(product.getStockQuantity());
-        entityProduct.setSupplier(MapperSupplier.toEntity(product.getSupplier()));
+        entityProduct.setSupplier(product.getSupplier());
 
         return repositoryProduct.update(entityProduct).map(MapperProduct::toModel);
     }

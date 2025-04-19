@@ -52,7 +52,7 @@ public class RepositoryProduct {
         return db.values().stream()
         .filter(u -> nameProduct ==null || u.getName().contains(nameProduct))
         .filter(u -> category == null  || u.getCategory().contains(category))
-        .filter(u -> nameSupplier ==null || u.getSupplier().getName().contains(nameSupplier))
+        .filter(u -> nameSupplier ==null || u.getSupplier().contains(nameSupplier))
         .collect(Collectors.toList());
     }
 

@@ -16,7 +16,7 @@ public interface MapperProduct {
         .price(dto.getPrice()) 
         .category(dto.getCategory())
         .stockQuantity(dto.getStockQuantity())
-        .supplier(MapperSupplier.toModel(dto.getSupplier()))
+        .supplier(dto.getSupplier())
         .build();
     }
 
@@ -28,7 +28,7 @@ public interface MapperProduct {
         .price(entity.getPrice())
         .category(entity.getCategory())
         .stockQuantity(entity.getStockQuantity())
-        .supplier(MapperSupplier.toModel(entity.getSupplier()))
+        .supplier(entity.getSupplier())
         .build();
     }
 
@@ -40,7 +40,7 @@ public interface MapperProduct {
             model.getPrice(), 
             model.getCategory(), 
             model.getStockQuantity(), 
-            MapperSupplier.toEntity(model.getSupplier())
+            model.getSupplier()
         );
 
     }
@@ -53,7 +53,7 @@ public interface MapperProduct {
         .price(model.getPrice())
         .category(model.getCategory())
         .stockQuantity(model.getStockQuantity())
-        .supplier(MapperSupplier.toDto(model.getSupplier()))
+        .supplier(model.getSupplier())
         .build();
     }
 

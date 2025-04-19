@@ -19,7 +19,7 @@ public class SaveProduct implements ISaveProduct{
     public Product save(Product product) {
         product.setCategory(product.getCategory().toLowerCase());
         product.setName(product.getName().toLowerCase());
-        product.getSupplier().setName(product.getSupplier().getName().toLowerCase());
+        product.setSupplier(product.getSupplier().toLowerCase());
         EntityProduct entityProduct = MapperProduct.toEntity(product);
         return MapperProduct.toModel(repositoryProduct.save(entityProduct));
     }

@@ -30,5 +30,5 @@ public class DtoProduct {
     private int stockQuantity;
 
     @Valid
-    private DtoSupplier supplier;
+    private String supplier;
 }
