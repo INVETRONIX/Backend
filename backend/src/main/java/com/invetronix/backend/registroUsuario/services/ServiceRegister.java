@@ -19,10 +19,10 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class ServiceRegister implements ISaveUser, 
-        IFindUserById, IFindUserByEmail, IDeleteUserById, 
-        IDeleteUserByEmail, IUpdateUserById, IUpdateUserByEmail, 
-        IFindAllUsers, IFindUsersByFilters, IFindUserByAuthToken 
+public class ServiceRegister implements ISaveUser,
+        IFindUserById, IFindUserByEmail, IDeleteUserById,
+        IDeleteUserByEmail, IUpdateUserById, IUpdateUserByEmail,
+        IFindAllUsers, IFindUsersByFilters, IFindUserByAuthToken
     {
         
     private final ISaveUser saveUser;

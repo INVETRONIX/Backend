@@ -3,7 +3,6 @@ package com.invetronix.backend.APIproducts.mappers;
 import com.invetronix.backend.APIproducts.dtos.DtoProduct;
 import com.invetronix.backend.APIproducts.entities.EntityProduct;
 import com.invetronix.backend.APIproducts.models.Product;
-import com.invetronix.backend.APIsuppliers.mappers.MapperSupplier;
 
 public interface MapperProduct {
 

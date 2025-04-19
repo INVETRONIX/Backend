@@ -1,7 +1,5 @@
 package com.invetronix.backend.APIproducts.models;
 
-import com.invetronix.backend.APIsuppliers.models.Supplier;
-
 import lombok.Builder;
 import lombok.Data;
 

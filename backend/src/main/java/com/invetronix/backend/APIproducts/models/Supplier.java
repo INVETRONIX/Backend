@@ -1,4 +1,4 @@
-package com.invetronix.backend.APIsuppliers.models;
+package com.invetronix.backend.APIproducts.models;
 
 import lombok.Builder;
 import lombok.Data;
@@ -6,10 +6,9 @@ import lombok.Data;
 @Data
 @Builder
 public class Supplier {
-
     private String id;
     private String name;
-    private String company;
-    private String phone;
     private String email;
+    private String company;
+    private String phone; 
 }

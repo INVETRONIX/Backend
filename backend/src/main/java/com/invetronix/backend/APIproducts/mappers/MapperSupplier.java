@@ -1,12 +1,12 @@
-package com.invetronix.backend.APIsuppliers.mappers;
+package com.invetronix.backend.APIproducts.mappers;
 
-import com.invetronix.backend.APIsuppliers.dtos.DtoSupplier;
-import com.invetronix.backend.APIsuppliers.entities.EntitySupplier;
-import com.invetronix.backend.APIsuppliers.models.Supplier;
+import com.invetronix.backend.APIproducts.dtos.DtoSupplier;
+import com.invetronix.backend.APIproducts.entities.EntitySupplier;
+import com.invetronix.backend.APIproducts.models.Supplier;
 
 public class MapperSupplier {
     
-     public static Supplier toModel(DtoSupplier supplierDto){
+    public static Supplier toModel(DtoSupplier supplierDto){
         return Supplier.builder()
         .id(supplierDto.getId())
         .name(supplierDto.getName())

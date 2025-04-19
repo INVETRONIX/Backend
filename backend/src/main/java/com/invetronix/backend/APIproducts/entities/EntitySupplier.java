@@ -1,7 +1,8 @@
-package com.invetronix.backend.APIsuppliers.entities;
+package com.invetronix.backend.APIproducts.entities;
 
 import java.io.Serializable;
 import java.util.UUID;
+
 import lombok.Data;
 
 @Data
@@ -20,5 +21,4 @@ public class EntitySupplier implements Serializable{
         this.phone = phone;
         this.email = email;
     }
-
 }
