@@ -13,10 +13,10 @@ public class EntityProduct implements Serializable{
     private double price;
     private String category;
     private int stockQuantity;
-    private EntitySupplier supplier;
+    private String supplier;
 
     public EntityProduct(String name, String description, double price, String category, int stockQuantity,
-            EntitySupplier supplier) {
+            String supplier) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
         this.description = description;
