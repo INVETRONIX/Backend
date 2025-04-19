@@ -15,7 +15,7 @@ import com.invetronix.backend.APIpurchases.services.ServicePurchase;
 import com.invetronix.backend.shared.controllers.ErrorResponse;
 import lombok.RequiredArgsConstructor;
 
-@Component
+@Component("getOperationPurchase")
 @RequiredArgsConstructor
 public class GetOperations implements IGetOperations{
     private final ServicePurchase servicePurchase;

@@ -33,7 +33,7 @@ public class UpdateUserByEmail implements IUpdateUserByEmail{
 
     @Autowired
     public UpdateUserByEmail(RepositoryRegister repositoryRegister,
-            ValidationServiceRegister validationServiceRegister) {
+            IValidationServiceRegister validationServiceRegister) {
         this.repositoryRegister = repositoryRegister;
         this.validationServiceRegister = validationServiceRegister;
     }

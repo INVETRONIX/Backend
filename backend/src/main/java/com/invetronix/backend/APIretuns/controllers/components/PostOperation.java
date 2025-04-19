@@ -11,7 +11,7 @@ import com.invetronix.backend.APIretuns.services.ServiceDevolution;
 import com.invetronix.backend.shared.controllers.ErrorResponse;
 import lombok.RequiredArgsConstructor;
 
-@Component
+@Component("postOperationReturn")
 @RequiredArgsConstructor
 public class PostOperation implements IPostOperation{
     private final ServiceDevolution serviceDevolution;

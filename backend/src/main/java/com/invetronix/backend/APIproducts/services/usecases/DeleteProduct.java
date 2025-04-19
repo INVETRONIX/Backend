@@ -15,7 +15,7 @@ public class DeleteProduct implements IDeleteProduct{
     private final IValidationServiceProduct validation;
 
     @Autowired
-    public DeleteProduct(RepositoryProduct repository, ValidationServiceProduct validation) {
+    public DeleteProduct(RepositoryProduct repository, IValidationServiceProduct validation) {
         this.repository = repository;
         this.validation = validation;
     }

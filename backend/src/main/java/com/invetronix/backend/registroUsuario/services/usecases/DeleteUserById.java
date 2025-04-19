@@ -24,7 +24,7 @@ public class DeleteUserById implements IDeleteUserById{
     }
 
     @Autowired
-    public DeleteUserById(RepositoryRegister repositoryRegister, ValidationServiceRegister validationServiceRegister) {
+    public DeleteUserById(RepositoryRegister repositoryRegister, IValidationServiceRegister validationServiceRegister) {
         this.repositoryRegister = repositoryRegister;
         this.validationServiceRegister = validationServiceRegister;
     }

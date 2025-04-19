@@ -24,7 +24,7 @@ public class SaveUser implements ISaveUser{
     }
 
     @Autowired
-    public SaveUser(RepositoryRegister repositoryRegister2, ValidationServiceRegister validationServiceRegister2, PasswordEncoder passwordEncoder2) {
+    public SaveUser(RepositoryRegister repositoryRegister2, IValidationServiceRegister validationServiceRegister2, PasswordEncoder passwordEncoder2) {
         this.repositoryRegister= repositoryRegister2;
         this.validationServiceRegister= validationServiceRegister2;
         this.passwordEncoder= passwordEncoder2;

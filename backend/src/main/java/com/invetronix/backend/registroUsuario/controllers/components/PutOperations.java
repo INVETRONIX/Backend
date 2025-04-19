@@ -13,7 +13,7 @@ import com.invetronix.backend.registroUsuario.services.ServiceRegister;
 import com.invetronix.backend.shared.controllers.ErrorResponse;
 import lombok.RequiredArgsConstructor;
 
-@Component
+@Component("putOperationRegister")
 @RequiredArgsConstructor
 public class PutOperations implements IPutOperations{
     private final ServiceRegister serviceRegister;

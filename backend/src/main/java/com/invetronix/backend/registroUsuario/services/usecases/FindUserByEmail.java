@@ -23,7 +23,7 @@ public class FindUserByEmail implements IFindUserByEmail{
     }
 
     @Autowired
-    public FindUserByEmail(RepositoryRegister repositoryRegister, ValidationServiceRegister validationServiceRegister) {
+    public FindUserByEmail(RepositoryRegister repositoryRegister, IValidationServiceRegister validationServiceRegister) {
         this.repositoryRegister = repositoryRegister;
         this.validationServiceRegister = validationServiceRegister;
     }

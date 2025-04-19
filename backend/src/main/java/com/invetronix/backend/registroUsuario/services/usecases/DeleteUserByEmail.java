@@ -25,7 +25,7 @@ public class DeleteUserByEmail implements IDeleteUserByEmail{
 
     @Autowired
     public DeleteUserByEmail(RepositoryRegister repositoryRegister,
-            ValidationServiceRegister validationServiceRegister) {
+            IValidationServiceRegister validationServiceRegister) {
         this.repositoryRegister = repositoryRegister;
         this.validationServiceRegister = validationServiceRegister;
     }

@@ -11,7 +11,7 @@ import com.invetronix.backend.APIproducts.services.ServiceProduct;
 import com.invetronix.backend.shared.controllers.ErrorResponse;
 import lombok.RequiredArgsConstructor;
 
-@Component
+@Component("postOperationProduct")
 @RequiredArgsConstructor
 public class PostOperation implements IPostOperation{
     private final ServiceProduct serviceProduct;
