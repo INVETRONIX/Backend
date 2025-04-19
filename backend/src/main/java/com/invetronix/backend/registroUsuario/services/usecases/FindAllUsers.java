@@ -2,6 +2,9 @@ package com.invetronix.backend.registroUsuario.services.usecases;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.invetronix.backend.registroUsuario.mappers.MapperUser;
 import com.invetronix.backend.registroUsuario.models.Client;
 import com.invetronix.backend.registroUsuario.repositories.RepositoryRegister;
@@ -18,6 +21,7 @@ public class FindAllUsers implements IFindAllUsers {
                 .collect(Collectors.toList());
     }
 
+    @Autowired
     public FindAllUsers(RepositoryRegister repositoryRegister) {
         this.repositoryRegister = repositoryRegister;
     }

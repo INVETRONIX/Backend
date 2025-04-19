@@ -21,9 +21,9 @@ public class Data implements Serializable{
         return instance;
     }
 
-     public void write(HashMap<String, EntityProduct> db) {
+    public void write(HashMap<String, EntityProduct> db) {
         try{
-            FileOutputStream file = new FileOutputStream("DataProducts.dat");
+            FileOutputStream file = new FileOutputStream("DBProducts.dat");
             ObjectOutputStream escritor = new ObjectOutputStream(file);
             escritor.writeObject(db);
         }catch(IOException ex){
@@ -33,7 +33,7 @@ public class Data implements Serializable{
 
     public HashMap<String, EntityProduct> read() {
         try {
-            FileInputStream file = new FileInputStream("DataProducts.dat");
+            FileInputStream file = new FileInputStream("DBProducts.dat");
             ObjectInputStream lector = new ObjectInputStream(file);
             return (HashMap<String, EntityProduct>) lector.readObject();
         }  catch (IOException | ClassNotFoundException ex) {

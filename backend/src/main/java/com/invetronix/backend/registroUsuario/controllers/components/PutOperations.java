@@ -11,7 +11,6 @@ import com.invetronix.backend.registroUsuario.mappers.MapperUser;
 import com.invetronix.backend.registroUsuario.models.Client;
 import com.invetronix.backend.registroUsuario.services.ServiceRegister;
 import com.invetronix.backend.shared.controllers.ErrorResponse;
-
 import lombok.RequiredArgsConstructor;
 
 @Component

@@ -1,6 +1,5 @@
 package com.invetronix.backend.APIproducts.dtos;
 
-
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
