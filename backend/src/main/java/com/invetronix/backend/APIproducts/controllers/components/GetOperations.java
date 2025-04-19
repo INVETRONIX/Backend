@@ -13,7 +13,7 @@ import com.invetronix.backend.APIproducts.services.ServiceProduct;
 import com.invetronix.backend.shared.controllers.ErrorResponse;
 import lombok.RequiredArgsConstructor;
 
-@Component
+@Component("getOperationProduct")
 @RequiredArgsConstructor
 public class GetOperations implements IGetOperations{
     private final ServiceProduct serviceProduct;

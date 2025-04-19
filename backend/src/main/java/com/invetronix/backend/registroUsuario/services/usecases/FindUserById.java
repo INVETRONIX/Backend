@@ -23,7 +23,7 @@ public class FindUserById implements IFindUserById{
     }
 
     @Autowired
-    public FindUserById(RepositoryRegister repositoryRegister, ValidationServiceRegister validationServiceRegister) {
+    public FindUserById(RepositoryRegister repositoryRegister, IValidationServiceRegister validationServiceRegister) {
         this.repositoryRegister = repositoryRegister;
         this.validationServiceRegister = validationServiceRegister;
     }

@@ -10,7 +10,7 @@ import com.invetronix.backend.registroUsuario.services.ServiceRegister;
 import com.invetronix.backend.shared.controllers.ErrorResponse;
 import lombok.RequiredArgsConstructor;
 
-@Component
+@Component("deleteOperationRegister")
 @RequiredArgsConstructor
 public class DeleteOperations implements IDeleteOperations{
     private final ServiceRegister serviceRegister;

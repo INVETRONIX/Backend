@@ -12,7 +12,7 @@ import com.invetronix.backend.APIpurchases.services.ServicePurchase;
 import com.invetronix.backend.shared.controllers.ErrorResponse;
 import lombok.RequiredArgsConstructor;
 
-@Component
+@Component("putOperationPurchase")
 @RequiredArgsConstructor
 public class PutOperation implements  IPutOperation{
     private final ServicePurchase servicePurchase;

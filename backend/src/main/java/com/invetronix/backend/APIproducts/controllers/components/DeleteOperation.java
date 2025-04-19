@@ -10,7 +10,7 @@ import com.invetronix.backend.APIproducts.services.ServiceProduct;
 import com.invetronix.backend.shared.controllers.ErrorResponse;
 import lombok.RequiredArgsConstructor;
 
-@Component
+@Component("deleteOperationProduct")
 @RequiredArgsConstructor
 public class DeleteOperation implements IDeleteOperation{
     private final ServiceProduct serviceProduct;

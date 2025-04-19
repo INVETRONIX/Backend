@@ -32,7 +32,7 @@ public class UpdateUserById implements IUpdateUserById{
     }
     
     @Autowired
-    public UpdateUserById(RepositoryRegister repositoryRegister, ValidationServiceRegister validationServiceRegister) {
+    public UpdateUserById(RepositoryRegister repositoryRegister, IValidationServiceRegister validationServiceRegister) {
         this.repositoryRegister = repositoryRegister;
         this.validationServiceRegister = validationServiceRegister;
     }
