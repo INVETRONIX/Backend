@@ -1,12 +1,6 @@
 package com.invetronix.backend.APIpurchases.mappers;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import com.invetronix.backend.APIproducts.dtos.DtoProduct;
-import com.invetronix.backend.APIproducts.entities.EntityProduct;
 import com.invetronix.backend.APIproducts.mappers.MapperProduct;
-import com.invetronix.backend.APIproducts.models.Product;
 import com.invetronix.backend.APIpurchases.dtos.DtoPurchase;
 import com.invetronix.backend.APIpurchases.entities.EntityPurchase;
 import com.invetronix.backend.APIpurchases.models.Purchase;

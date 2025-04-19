@@ -5,4 +5,4 @@ import com.invetronix.backend.APIproducts.entities.EntityProduct;
 
 public interface IValidationServiceProduct {
     void validateProductExist(Optional<EntityProduct> entity, String id);
-}
+} 

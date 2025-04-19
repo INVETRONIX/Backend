@@ -5,4 +5,4 @@ import com.invetronix.backend.APIproducts.models.Product;
 
 public interface IFindProductById {
     Optional<Product> findById(String id);
-}
+} 

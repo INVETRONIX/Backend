@@ -5,4 +5,4 @@ import com.invetronix.backend.APIproducts.models.Product;
 
 public interface IFindAllProducts {
     List<Product> findAll();
-}
+} 

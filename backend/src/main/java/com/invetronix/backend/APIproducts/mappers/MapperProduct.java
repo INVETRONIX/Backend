@@ -80,6 +80,5 @@ public interface MapperProduct {
         .map(MapperProduct::toDto)
         .collect(Collectors.toList());
     }
-
     
 }
