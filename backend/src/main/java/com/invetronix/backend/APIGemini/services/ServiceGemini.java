@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.invetronix.backend.APIproducts.models.Product;
+import io.github.cdimascio.dotenv.Dotenv;
 import okhttp3.*;
 import org.springframework.stereotype.Service;
 import java.io.IOException;
@@ -15,7 +16,8 @@ public class ServiceGemini implements IServiceGemini{
 
     private final OkHttpClient client = new OkHttpClient();
     private final Gson gson = new Gson();
-    private String apiKey = "AIzaSyCQbeRycKQc-55JVfvEineJzvuJZzFI330";
+    Dotenv dotenv = Dotenv.load(); // Carga variables del .env
+    private String apiKey =  dotenv.get("API_KEY");
 
     public String predecirProductosMasVendidos(List<Product> products) throws IOException {
         String prompt = "Según la siguiente lista de productos, dime cuáles productos son los que más y menos se van a vender, "
