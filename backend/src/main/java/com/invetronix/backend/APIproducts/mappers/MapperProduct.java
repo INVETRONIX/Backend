@@ -81,5 +81,11 @@ public interface MapperProduct {
         .collect(Collectors.toList());
     }
 
+    public static List<Product> toModel(List<EntityProduct> products) {
+        return products.stream()
+        .map(MapperProduct::toModel)
+        .collect(Collectors.toList());
+    }
+
     
 }

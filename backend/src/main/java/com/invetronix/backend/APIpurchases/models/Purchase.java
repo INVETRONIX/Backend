@@ -11,7 +11,7 @@ import lombok.experimental.SuperBuilder;
 
 @Data
 @SuperBuilder
-@NoArgsConstructor 
+@NoArgsConstructor  
 public class Purchase {
     private String id;
     private Client client;

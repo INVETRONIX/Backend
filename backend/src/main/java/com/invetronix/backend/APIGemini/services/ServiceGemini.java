@@ -3,12 +3,17 @@ package com.invetronix.backend.APIGemini.services;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.invetronix.backend.APIproducts.models.Product;
+import com.invetronix.backend.APIGemini.model.ProductResumen;
+import com.invetronix.backend.APIproducts.mappers.MapperProduct;
+import com.invetronix.backend.APIpurchases.data.Data;
+import com.invetronix.backend.APIpurchases.entities.EntityPurchase;
 import io.github.cdimascio.dotenv.Dotenv;
 import okhttp3.*;
 import org.springframework.stereotype.Service;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Service
@@ -19,9 +24,13 @@ public class ServiceGemini implements IServiceGemini{
     Dotenv dotenv = Dotenv.load(); // Carga variables del .env
     private String apiKey =  dotenv.get("API_KEY");
 
-    public String predecirProductosMasVendidos(List<Product> products) throws IOException {
-        String prompt = "Según la siguiente lista de productos, dime cuáles productos son los que más y menos se van a vender, "
-                      + "basándote en su precio, categoría y stock. Responde solo con el análisis solicitado, sin añadir información adicional:\n"
+    public String predecirProductosMasVendidos() throws IOException {
+
+        List<ProductResumen> products = obtenerResumenProductosVendidos();
+
+
+
+        String prompt = "Según la siguiente lista de productos con sus ventas totales, dime cuáles productos tienen más probabilidad de venderse y cuáles menos:\n"
                       + gson.toJson(products);
 
         String url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent?key=" + apiKey;
@@ -31,7 +40,7 @@ public class ServiceGemini implements IServiceGemini{
           "contents": [{
             "parts": [{
               "text": "%s"
-            }]
+            }] 
           }],
           "generationConfig": {
             "temperature": 0.9,
@@ -76,4 +85,41 @@ public class ServiceGemini implements IServiceGemini{
             return "Error al procesar la respuesta de Gemini: " + e.getMessage();
         }
     }
+
+
+    private  List<ProductResumen> obtenerResumenProductosVendidos(){
+            // Leer ventas desde .dat
+        List<EntityPurchase> ventas = new ArrayList<>(((Map<?, EntityPurchase>) Data.getInstance().read()).values());
+
+        ProductResumen resumen = new ProductResumen();
+
+        List<ProductResumen> listaResumen = new ArrayList<>();
+
+        for (int i = 0; i < ventas.size(); i++) {
+          for (int j = 0; j < ventas.get(i).getProducts().size(); j++) {
+              if(ventas.get(i).getProducts().get(i)!=null){
+
+                for (int k = 0; k < listaResumen.size(); k++) {
+                    if(MapperProduct.toModel(ventas.get(i).getProducts().get(i)).equals(listaResumen.get(k).getProduct())){
+                        listaResumen.get(k).setVentasTotales(listaResumen.get(k).getVentasTotales()+1);
+                    }
+                }
+
+
+
+              }
+
+              resumen.setProduct(MapperProduct.toModel(ventas.get(i).getProducts().get(i)));
+              resumen.setVentasTotales(1);
+
+              listaResumen.add(resumen);
+          }
+          
+        }
+
+
+        return listaResumen;
+    }
+
+    
 }

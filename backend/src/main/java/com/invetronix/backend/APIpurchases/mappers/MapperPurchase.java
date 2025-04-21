@@ -1,5 +1,8 @@
 package com.invetronix.backend.APIpurchases.mappers;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.invetronix.backend.APIproducts.mappers.MapperProduct;
 import com.invetronix.backend.APIpurchases.dtos.DtoPurchase;
 import com.invetronix.backend.APIpurchases.entities.EntityPurchase;
@@ -51,6 +54,12 @@ public class MapperPurchase {
         .total(model.getTotal())
         .products(MapperProduct.toDtoFromModel(model.getProducts()))
         .build();
+    }
+
+    public static List<Purchase> toModelFromEntity(List<EntityPurchase> products) {
+        return products.stream()
+        .map(MapperPurchase::toModel)
+        .collect(Collectors.toList());
     }
 
 }

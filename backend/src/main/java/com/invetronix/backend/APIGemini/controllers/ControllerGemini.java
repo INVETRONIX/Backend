@@ -2,9 +2,6 @@ package com.invetronix.backend.APIGemini.controllers;
 
 import com.invetronix.backend.APIGemini.services.IServiceGemini;
 import com.invetronix.backend.APIGemini.services.ServiceGemini;
-import com.invetronix.backend.APIproducts.data.Data;
-import com.invetronix.backend.APIproducts.entities.EntityProduct;
-import com.invetronix.backend.APIproducts.mappers.MapperProduct;
 import com.invetronix.backend.APIproducts.models.Product;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -17,8 +14,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -97,13 +92,11 @@ public class ControllerGemini {
                 }
             )
         )
-    })
+    })  
     @PostMapping
     public ResponseEntity<?> predecir() {
-        List<EntityProduct> products = new ArrayList<>(((Map<?, EntityProduct>) Data.getInstance().read()).values());
-        List<Product> products2 = MapperProduct.toModelFromEntity(products);
         try {
-            String respuesta = serviceGemini.predecirProductosMasVendidos(products2);
+            String respuesta = serviceGemini.predecirProductosMasVendidos();
             return ResponseEntity.ok(respuesta);
         } catch (IOException e) {
             return ResponseEntity.badRequest().body(
