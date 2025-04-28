@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.invetronix.backend.APIGemini.model.ProductResumen;
 import com.invetronix.backend.APIproducts.mappers.MapperProduct;
+import com.invetronix.backend.APIproducts.models.Product;
 import com.invetronix.backend.APIpurchases.data.Data;
 import com.invetronix.backend.APIpurchases.entities.EntityPurchase;
 import io.github.cdimascio.dotenv.Dotenv;
@@ -12,6 +13,7 @@ import okhttp3.*;
 import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -27,8 +29,6 @@ public class ServiceGemini implements IServiceGemini{
     public String predecirProductosMasVendidos() throws IOException {
 
         List<ProductResumen> products = obtenerResumenProductosVendidos();
-
-
 
         String prompt = "Según la siguiente lista de productos con sus ventas totales, dime cuáles productos tienen más probabilidad de venderse y cuáles menos:\n"
                       + gson.toJson(products);
@@ -87,37 +87,34 @@ public class ServiceGemini implements IServiceGemini{
     }
 
 
-    private  List<ProductResumen> obtenerResumenProductosVendidos(){
-            // Leer ventas desde .dat
+private List<ProductResumen> obtenerResumenProductosVendidos() {
+        // Leer ventas desde .dat
         List<EntityPurchase> ventas = new ArrayList<>(((Map<?, EntityPurchase>) Data.getInstance().read()).values());
-
-        ProductResumen resumen = new ProductResumen();
-
+        Map<String, ProductResumen> resumenPorProducto = new HashMap<>();
         List<ProductResumen> listaResumen = new ArrayList<>();
 
-        for (int i = 0; i < ventas.size(); i++) {
-          for (int j = 0; j < ventas.get(i).getProducts().size(); j++) {
-              if(ventas.get(i).getProducts().get(i)!=null){
+        for (EntityPurchase venta : ventas) {
+            for (int j = 0; j < venta.getProducts().size(); j++) {
+                if (venta.getProducts().get(j) != null) {
+                    Product producto = MapperProduct.toModel(venta.getProducts().get(j));
+                    String productId = producto.getId();
 
-                for (int k = 0; k < listaResumen.size(); k++) {
-                    if(MapperProduct.toModel(ventas.get(i).getProducts().get(i)).equals(listaResumen.get(k).getProduct())){
-                        listaResumen.get(k).setVentasTotales(listaResumen.get(k).getVentasTotales()+1);
+                    if (resumenPorProducto.containsKey(productId)) {
+                        // Si el producto ya está en el resumen, incrementa el contador
+                        resumenPorProducto.get(productId).setVentasTotales(resumenPorProducto.get(productId).getVentasTotales() + 1);
+                    } else {
+                        // Si el producto no está en el resumen, crea una nueva entrada
+                        ProductResumen nuevoResumen = new ProductResumen();
+                        nuevoResumen.setProduct(producto);
+                        nuevoResumen.setVentasTotales(1);
+                        resumenPorProducto.put(productId, nuevoResumen);
                     }
                 }
-
-
-
-              }
-
-              resumen.setProduct(MapperProduct.toModel(ventas.get(i).getProducts().get(i)));
-              resumen.setVentasTotales(1);
-
-              listaResumen.add(resumen);
-          }
-          
+            }
         }
 
-
+        // Convierte el mapa de resumen a una lista
+        listaResumen.addAll(resumenPorProducto.values());
         return listaResumen;
     }
 

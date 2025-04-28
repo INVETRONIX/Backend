@@ -97,7 +97,7 @@ public class ControllerGemini {
     public ResponseEntity<?> predecir() {
         try {
             String respuesta = serviceGemini.predecirProductosMasVendidos();
-            return ResponseEntity.ok(respuesta);
+            return ResponseEntity.ok(Map.of("prediccion", respuesta)); // Devolver un Map (se serializará a JSON)
         } catch (IOException e) {
             return ResponseEntity.badRequest().body(
                 Map.of(

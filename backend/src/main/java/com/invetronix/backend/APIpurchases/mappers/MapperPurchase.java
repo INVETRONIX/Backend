@@ -2,7 +2,6 @@ package com.invetronix.backend.APIpurchases.mappers;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 import com.invetronix.backend.APIproducts.mappers.MapperProduct;
 import com.invetronix.backend.APIpurchases.dtos.DtoPurchase;
 import com.invetronix.backend.APIpurchases.entities.EntityPurchase;
@@ -36,9 +35,7 @@ public class MapperPurchase {
     public static EntityPurchase toEntity(Purchase model){
 
         return new EntityPurchase(
-            MapperUser.toEntity(model.getClient()), 
-            model.getHour(), 
-            model.getDate(), 
+            MapperUser.toEntity(model.getClient()),
             MapperProduct.toEntityFromModel(model.getProducts()), 
             model.getTotal()
         );

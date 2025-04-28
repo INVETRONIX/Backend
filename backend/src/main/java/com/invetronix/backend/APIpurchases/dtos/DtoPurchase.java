@@ -20,10 +20,8 @@ public class DtoPurchase {
     @Valid
     private DtoClient client;
 
-    @NotNull(message = "La hora no puede estar vacia")
     private LocalTime hour;
 
-    @NotNull(message = "La fecha no puede estar vacia")
     private LocalDate date;
 
     @Valid
