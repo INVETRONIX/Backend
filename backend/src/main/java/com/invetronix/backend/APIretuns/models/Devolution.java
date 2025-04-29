@@ -11,4 +11,5 @@ import lombok.experimental.SuperBuilder;
 public class Devolution {
     private String id;
     private Purchase purchase;
+    private String date;
 }

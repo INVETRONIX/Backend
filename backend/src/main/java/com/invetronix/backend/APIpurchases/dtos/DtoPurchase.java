@@ -20,9 +20,9 @@ public class DtoPurchase {
     @Valid
     private DtoClient client;
 
-    private LocalTime hour;
+    private String hour;
 
-    private LocalDate date;
+    private String date;
 
     @Valid
     @NotNull(message = "La lista de productos no puede ser nula")

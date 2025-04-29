@@ -36,7 +36,7 @@ public class MapperPurchase {
 
         return new EntityPurchase(
             MapperUser.toEntity(model.getClient()),
-            MapperProduct.toEntityFromModel(model.getProducts()), 
+            model.getHour(), model.getDate(), MapperProduct.toEntityFromModel(model.getProducts()), 
             model.getTotal()
         );
 

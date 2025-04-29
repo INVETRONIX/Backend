@@ -12,4 +12,6 @@ public class DtoDevolution {
 
     @Valid
     private DtoPurchase purchase;
+
+    private String date;
 }

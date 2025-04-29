@@ -10,6 +10,7 @@ public class MapperDevolution {
         return Devolution.builder()
         .id(dto.getId())
         .purchase(MapperPurchase.toModel(dto.getPurchase()))
+        .date(dto.getDate())
         .build();
     }
 
@@ -17,12 +18,13 @@ public class MapperDevolution {
         return Devolution.builder()
         .id(entity.getId())
         .purchase(MapperPurchase.toModel(entity.getPurchase()))
+        .date(entity.getDate())
         .build();
     }
 
     public static EntityDevolution toEntity(Devolution model){
 
-        return new EntityDevolution(MapperPurchase.toEntity(model.getPurchase()));
+        return new EntityDevolution(MapperPurchase.toEntity(model.getPurchase()), model.getDate());
 
     }
 
@@ -30,6 +32,7 @@ public class MapperDevolution {
         return DtoDevolution.builder()
         .id(model.getId())
         .purchase(MapperPurchase.toDto(model.getPurchase()))
+        .date(model.getDate())
         .build();
     }
 }

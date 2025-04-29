@@ -15,8 +15,8 @@ import lombok.experimental.SuperBuilder;
 public class Purchase {
     private String id;
     private Client client;
-    private LocalTime hour;
-    private LocalDate date;
+    private String hour;
+    private String date;
     private List<Product> products;
     private double total;
 }
