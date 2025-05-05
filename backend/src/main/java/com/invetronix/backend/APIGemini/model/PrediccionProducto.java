@@ -4,8 +4,9 @@ import com.invetronix.backend.APIproducts.model.Producto;
 import lombok.Data;
 
 @Data
-public class ProductResumen {
+public class PrediccionProducto {
     private Producto producto;
-    private int ventasTotales;
-    private double totalVendido;
+    private Double probabilidadVenta;
+    private String tendencia; // "ALTA", "MEDIA" o "BAJA"
+    private String razonamiento;
 } 
