@@ -3,6 +3,7 @@ package com.invetronix.backend.APIusuarios.service;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.invetronix.backend.APIusuarios.exception.UsuarioNoEncontrado;
 import com.invetronix.backend.APIusuarios.exception.UsuarioYaRegistrado;
@@ -16,6 +17,9 @@ public class UsuarioService implements IUsuarioService{
 
     @Autowired
     private final UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private final PasswordEncoder passwordEncoder;
 
 
     @Override
@@ -53,6 +57,7 @@ public class UsuarioService implements IUsuarioService{
         }
         
         usuario.setRol("CLIENTE");
+        usuario.setContrasena(passwordEncoder.encode(usuario.getContrasena()));
         Usuario respuesta = usuarioRepository.save(usuario);
         return respuesta;
     }

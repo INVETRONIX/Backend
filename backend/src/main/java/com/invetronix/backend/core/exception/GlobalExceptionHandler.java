@@ -8,6 +8,7 @@ import com.invetronix.backend.APIusuarios.exception.UsuarioNoEncontrado;
 import com.invetronix.backend.APIusuarios.exception.UsuarioYaRegistrado;
 import com.invetronix.backend.APIproductos.exception.ProductoNoEncontrado;
 import com.invetronix.backend.APIcompras.exception.CompraNoEncontrada;
+import com.invetronix.backend.APIlogin.exception.InvalidPassword;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -29,5 +30,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(CompraNoEncontrada.class)
     public ResponseEntity<String> handleCompraNoEncontrada(CompraNoEncontrada ex){
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(InvalidPassword.class)
+    public ResponseEntity<String> handleInvalidPassword(InvalidPassword ex){
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }

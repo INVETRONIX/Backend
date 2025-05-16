@@ -1,11 +1,7 @@
 # Tareas Pendientes
 
-## Pruebas y Documentación
-- [ ] Implementar pruebas unitarias
-
 ## Seguridad y Autenticación
 - [ ] Implementar sistema de login
-- [ ] Encriptar contraseñas
 - [ ] Implementar JWT (JSON Web Tokens)
 
 ## APIs Adicionales
