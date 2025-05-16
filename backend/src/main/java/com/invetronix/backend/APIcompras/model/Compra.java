@@ -53,6 +53,6 @@ public class Compra {
     @PrePersist
     protected void onCreate() {
         fecha = LocalDate.now();
-        hora = LocalTime.now();
+        hora = LocalTime.now().withSecond(0).withNano(0);
     }
 }

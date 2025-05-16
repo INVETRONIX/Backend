@@ -23,8 +23,8 @@ public class CompraService implements ICompraService{
         if(compraRepository.getCompraById(id).isPresent()){
             Compra updated = compraRepository.getCompraById(id).get();
 
-            updated.setFecha(compra.getFecha());
-            updated.setHora(compra.getHora());
+            updated.setFecha(LocalDate.now());
+            updated.setHora(LocalTime.now().withSecond(0).withNano(0));
             updated.setUsuario(compra.getUsuario());
             updated.setProducto(compra.getProducto());
 
