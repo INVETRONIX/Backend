@@ -8,6 +8,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.invetronix.backend.core.exception.NoTokenException;
+import com.invetronix.backend.core.exception.NoAdminAccessException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -32,11 +34,21 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             HttpServletResponse response,
             FilterChain filterChain) throws ServletException, IOException {
         
+        String requestURI = request.getRequestURI();
+        String method = request.getMethod();
+
+        // Permitir acceso libre a endpoints públicos
+        if (requestURI.equals("/api/usuarios") && method.equals("POST") ||
+            requestURI.equals("/api/auth/login") ||
+            requestURI.startsWith("/api/compras")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         String authHeader = request.getHeader("Authorization");
         
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            filterChain.doFilter(request, response);
-            return;
+            throw new NoTokenException();
         }
 
         try {
@@ -52,6 +64,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String correo = claims.getSubject();
             String rol = claims.get("rol", String.class);
 
+            // Verificar si el endpoint requiere rol ADMIN
+            if ((requestURI.startsWith("/api/productos") || 
+                 (requestURI.startsWith("/api/usuarios") && !method.equals("POST"))) 
+                && !rol.equals("ADMIN")) {
+                throw new NoAdminAccessException();
+            }
+
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                     correo,
                     null,
@@ -60,6 +79,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             SecurityContextHolder.getContext().setAuthentication(authToken);
             
+        } catch (NoTokenException | NoAdminAccessException e) {
+            throw e;
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.setContentType("application/json");
