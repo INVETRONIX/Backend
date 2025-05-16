@@ -14,5 +14,5 @@ public interface IProductoService {
     List<Producto> findByNombre(String nombre);
     List<Producto> findByPrecio(double precio);
     List<Producto> findByStock(int stock);
-    List<Producto> findByFilters(String nombre, double precio, int stock);
+    List<Producto> findByFilters(String nombre, Double precio, Integer stock);
 }

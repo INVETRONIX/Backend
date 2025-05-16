@@ -22,6 +22,6 @@ public interface ProductoRepository extends JpaRepository<Producto, Long>{
     List<Producto> findByStock(@Param("stock") int stock);
 
     @Query(value = "SELECT * FROM productos WHERE (:nombre IS NULL OR nombre LIKE CONCAT('%', :nombre, '%')) AND (:precio IS NULL OR precio = :precio) AND (:stock IS NULL OR stock = :stock)", nativeQuery = true)
-    List<Producto> findByFilters(@Param("nombre") String nombre, @Param("precio") double precio, @Param("stock") int stock);
+    List<Producto> findByFilters(@Param("nombre") String nombre, @Param("precio") Double precio, @Param("stock") Integer stock);
 
 }

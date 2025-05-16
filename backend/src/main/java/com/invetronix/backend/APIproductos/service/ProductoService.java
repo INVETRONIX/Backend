@@ -24,6 +24,7 @@ public class ProductoService implements IProductoService{
             updated.setNombre(producto.getNombre());
             updated.setPrecio(producto.getPrecio());
             updated.setStock(producto.getStock());
+            updated.setDescripcion(producto.getDescripcion());
 
             Producto saved = productoRepository.save(updated);
             return Optional.of(saved);
@@ -79,7 +80,7 @@ public class ProductoService implements IProductoService{
     }
 
     @Override
-    public List<Producto> findByFilters(String nombre, double precio, int stock) {
+    public List<Producto> findByFilters(String nombre, Double precio, Integer stock) {
         return productoRepository.findByFilters(nombre, precio, stock);
     }
 }

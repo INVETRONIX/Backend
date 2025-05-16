@@ -3,7 +3,7 @@ package com.invetronix.backend.APIproductos.controller;
 import org.springframework.web.bind.annotation.RestController;
 import com.invetronix.backend.APIproductos.model.Producto;
 import com.invetronix.backend.APIproductos.service.IProductoService;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import java.util.List;
