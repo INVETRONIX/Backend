@@ -1,8 +1,6 @@
 # Tareas Pendientes
 
 ## Pruebas y Documentación
-- [ ] Probar funcionalidad de compras
-- [ ] Documentar API de compras
 - [ ] Implementar pruebas unitarias
 
 ## Seguridad y Autenticación
