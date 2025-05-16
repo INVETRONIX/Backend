@@ -56,6 +56,7 @@ public class UsuarioService implements IUsuarioService{
             throw new UsuarioYaRegistrado("EL usuario con email : " + usuario.getCorreo() + "Ya esta registrado");
         }
         
+        
         usuario.setRol("CLIENTE");
         usuario.setContrasena(passwordEncoder.encode(usuario.getContrasena()));
         Usuario respuesta = usuarioRepository.save(usuario);
