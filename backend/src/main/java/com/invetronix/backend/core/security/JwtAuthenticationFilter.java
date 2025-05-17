@@ -40,7 +40,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         // Permitir acceso libre a endpoints públicos
         if (requestURI.equals("/api/usuarios") && method.equals("POST") ||
             requestURI.equals("/api/auth/login") ||
-            requestURI.startsWith("/api/compras")) {
+            requestURI.startsWith("/api/compras") ||
+            requestURI.startsWith("/api/gemini")) {
             filterChain.doFilter(request, response);
             return;
         }

@@ -27,10 +27,12 @@ public class SecurityConfig {
                 .requestMatchers("/api/auth/login").permitAll()
                 .requestMatchers("/api/usuarios").permitAll() // Solo el POST (registro)
                 .requestMatchers("/api/compras/**").permitAll()
-                
+                .requestMatchers("/api/gemini/**").permitAll()
+                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                 // Endpoints protegidos que requieren rol ADMIN
                 .requestMatchers("/api/productos/**").hasRole("ADMIN")
                 .requestMatchers("/api/usuarios/**").hasRole("ADMIN")
+
                 
                 // Cualquier otra petición requiere autenticación
                 .anyRequest().authenticated()
