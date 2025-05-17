@@ -13,7 +13,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@Tag(name = "Predicciones de Productos", description = "Endpoints para obtener predicciones de ventas usando Gemini AI")
+@Tag(name = "Imagenes", description = "Endpoints para obtener imagenes de Unsplash")
 @RequestMapping("/api/images")
 public class ImageSearchController {
     private final IImageSearchService imageSearchService;

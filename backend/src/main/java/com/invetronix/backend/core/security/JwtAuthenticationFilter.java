@@ -37,11 +37,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String requestURI = request.getRequestURI();
         String method = request.getMethod();
 
-        // Permitir acceso libre a endpoints públicos
+        // Permitir acceso libre solo a endpoints específicos
         if (requestURI.equals("/api/usuarios") && method.equals("POST") ||
             requestURI.equals("/api/auth/login") ||
-            requestURI.startsWith("/api/compras") ||
-            requestURI.startsWith("/api/gemini")) {
+            requestURI.startsWith("/api/compras")) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -67,6 +66,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             // Verificar si el endpoint requiere rol ADMIN
             if ((requestURI.startsWith("/api/productos") || 
+                 requestURI.startsWith("/api/gemini") ||
+                 requestURI.startsWith("/api/images") ||
                  (requestURI.startsWith("/api/usuarios") && !method.equals("POST"))) 
                 && !rol.equals("ADMIN")) {
                 throw new NoAdminAccessException();

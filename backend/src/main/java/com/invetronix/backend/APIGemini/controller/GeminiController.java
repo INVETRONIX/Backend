@@ -1,4 +1,3 @@
-
 package com.invetronix.backend.APIGemini.controller;
 
 import com.invetronix.backend.APIGemini.model.GeminiResponse;
