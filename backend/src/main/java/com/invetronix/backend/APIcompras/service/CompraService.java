@@ -27,7 +27,8 @@ public class CompraService implements ICompraService{
             updated.setHora(LocalTime.now().withSecond(0).withNano(0));
             updated.setUsuario(compra.getUsuario());
             updated.setProducto(compra.getProducto());
-
+            updated.setTotal(compra.getProducto().getPrecio());
+            
             Compra saved = compraRepository.save(updated);
             return Optional.of(saved);
         }else{
@@ -48,6 +49,7 @@ public class CompraService implements ICompraService{
 
     @Override
     public Compra create(Compra compra) {
+        compra.setTotal(compra.getProducto().getPrecio());
         return compraRepository.save(compra);
     }
 

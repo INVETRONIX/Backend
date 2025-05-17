@@ -50,9 +50,16 @@ public class Compra {
     @Schema(description = "Producto comprado")
     private Producto producto;
 
+    @Column(name = "total", nullable = false)
+    @Schema(description = "Total de la compra (igual al precio del producto)", example = "100.00")
+    private Double total;
+
     @PrePersist
     protected void onCreate() {
         fecha = LocalDate.now();
         hora = LocalTime.now().withSecond(0).withNano(0);
+        if (producto != null) {
+            this.total = producto.getPrecio();
+        }
     }
 }
