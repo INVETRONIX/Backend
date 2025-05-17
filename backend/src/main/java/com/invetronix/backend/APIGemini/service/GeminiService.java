@@ -19,7 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Service
-public class GeminiService {
+public class GeminiService implements IGeminiService{
     private static final Logger logger = LoggerFactory.getLogger(GeminiService.class);
 
     @Value("${gemini.api.key}")

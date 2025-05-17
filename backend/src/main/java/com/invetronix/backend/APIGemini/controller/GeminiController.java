@@ -1,7 +1,7 @@
 package com.invetronix.backend.APIGemini.controller;
 
 import com.invetronix.backend.APIGemini.model.GeminiResponse;
-import com.invetronix.backend.APIGemini.service.GeminiService;
+import com.invetronix.backend.APIGemini.service.IGeminiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class GeminiController {
 
     @Autowired
-    private GeminiService geminiService;
+    private IGeminiService geminiService;
 
     @GetMapping("/predecir")
     @Operation(summary = "Analiza las ventas y proporciona predicciones", 
