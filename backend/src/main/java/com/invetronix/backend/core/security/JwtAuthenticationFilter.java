@@ -38,9 +38,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String method = request.getMethod();
 
         // Permitir acceso libre solo a endpoints específicos
-        if (requestURI.equals("/api/usuarios") && method.equals("POST") ||
+        if ((requestURI.equals("/api/usuarios") && method.equals("POST")) ||
             requestURI.equals("/api/auth/login") ||
-            requestURI.startsWith("/api/compras")) {
+            requestURI.startsWith("/api/compras") ||
+            (requestURI.equals("/api/productos") && method.equals("GET"))) {
             filterChain.doFilter(request, response);
             return;
         }
