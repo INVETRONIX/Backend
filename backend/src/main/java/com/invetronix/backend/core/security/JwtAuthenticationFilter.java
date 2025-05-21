@@ -41,7 +41,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if ((requestURI.equals("/api/usuarios") && method.equals("POST")) ||
             requestURI.equals("/api/auth/login") ||
             requestURI.startsWith("/api/compras") ||
-            (requestURI.equals("/api/productos") && method.equals("GET"))) {
+            (requestURI.equals("/api/productos") && method.equals("GET")) ||
+            (requestURI.equals("/api/images") && method.equals("GET"))
+            ) {
             filterChain.doFilter(request, response);
             return;
         }
