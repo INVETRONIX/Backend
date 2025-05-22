@@ -26,6 +26,7 @@ public class CompraService implements ICompraService{
     private ProductoRepository productoRepository;
 
     @Override
+    @Transactional
     public Optional<Compra> update(Long id, Compra compra) {
         if(compraRepository.getCompraById(id).isPresent()){
             Compra updated = compraRepository.getCompraById(id).get();
