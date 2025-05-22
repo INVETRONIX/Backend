@@ -28,16 +28,19 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/api/usuarios").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/compras/**").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/compras").permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/productos").permitAll()
+                
+                // Permitir todos los GET de productos
+                .requestMatchers(HttpMethod.GET, "/api/productos/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/producto/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/images").permitAll()
                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                 
                 // Endpoints protegidos que requieren autenticación
-                .requestMatchers(HttpMethod.DELETE, "/api/compras/**").authenticated()
-                .requestMatchers(HttpMethod.PUT, "/api/compras/**").authenticated()
-                
-                // Endpoints protegidos que requieren rol ADMIN
-                .requestMatchers("/api/productos/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/api/compras/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/api/compras/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/api/productos/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/api/productos/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/api/productos/**").hasRole("ADMIN")
                 .requestMatchers("/api/usuarios/**").hasRole("ADMIN")
                 .requestMatchers("/api/gemini/**").hasRole("ADMIN")
                 

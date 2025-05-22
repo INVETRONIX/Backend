@@ -41,9 +41,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if ((requestURI.equals("/api/usuarios") && method.equals("POST")) ||
             requestURI.equals("/api/auth/login") ||
             (requestURI.startsWith("/api/compras") && (method.equals("GET") || method.equals("POST"))) ||
-            (requestURI.equals("/api/productos") && method.equals("GET")) ||
-            (requestURI.equals("/api/images") && method.equals("GET"))
-            ) {
+            (requestURI.startsWith("/api/productos") && method.equals("GET")) ||
+            (requestURI.equals("/api/images") && method.equals("GET"))) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -68,12 +67,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String rol = claims.get("rol", String.class);
 
             // Verificar si el endpoint requiere rol ADMIN
-            if ((requestURI.startsWith("/api/productos") || 
-                 requestURI.startsWith("/api/gemini") ||
-                 requestURI.startsWith("/api/images") ||
-                 (requestURI.startsWith("/api/usuarios") && !method.equals("POST"))) 
-                && !rol.equals("ADMIN")) {
-                throw new NoAdminAccessException();
+            if ((requestURI.startsWith("/api/productos") && !method.equals("GET")) || 
+                requestURI.startsWith("/api/gemini") ||
+                (requestURI.startsWith("/api/usuarios") && !method.equals("POST")) ||
+                (requestURI.startsWith("/api/compras") && !method.equals("GET"))) {
+                if (!rol.equals("ADMIN")) {
+                    throw new NoAdminAccessException();
+                }
             }
 
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
